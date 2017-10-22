@@ -104,6 +104,46 @@ update_status ModuleSceneIntro::Update()
 
 		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
 	}*/
+	// Pivot 0, 0
+	int Paletadreta[16] = {
+		330, 709,
+		422, 638,
+		434, 604,
+		435, 539,
+		430, 538,
+		429, 599,
+		416, 635,
+		325, 704
+	};
+	// Pivot 0, 0
+	int Paletaesquerra[16] = {
+		153, 706,
+		61, 634,
+		49, 599,
+		50, 543,
+		44, 543,
+		43, 602,
+		54, 636,
+		149, 710
+	};
+
+	// Pivot 0, 0
+	int SobrePaletaesquerra[8] = {
+		154, 657,
+		89, 519,
+		87, 607,
+		150, 663
+	};
+
+	// Pivot 0, 0
+	int SobrePaletadreta[8] = {
+		320, 657,
+		386, 606,
+		385, 519,
+		317, 655
+	};
+
+
 
 	// Pivot 0, 0
 	int Captura[132] = {
@@ -176,7 +216,10 @@ update_status ModuleSceneIntro::Update()
 	};
 
 App->physics->CreateChain(0, 0, Captura, 132, b2_staticBody);
-	
+App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
+App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
+App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
+App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
 	
 
 	// Prepare for raycast ------------------------------------------------------
