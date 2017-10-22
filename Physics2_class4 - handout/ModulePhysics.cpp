@@ -36,9 +36,9 @@ bool ModulePhysics::Start()
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
+	int x = 0;
+	int y = 0;
+	int diameter = 0;
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -84,10 +84,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	b2Body* b = world->CreateBody(&body);
 
 	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(radius);
+	shape.m_radius = PIXEL_TO_METERS(radius)*0.5f;
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	fixture.density = 1.0f;
+	fixture.density = 0.9f;
 
 	b->CreateFixture(&fixture);
 

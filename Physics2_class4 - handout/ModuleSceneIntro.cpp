@@ -143,6 +143,104 @@ update_status ModuleSceneIntro::Update()
 		317, 655
 	};
 
+	// Pivot 0, 0 Add
+	int PaletaSuperior[18] = {
+		59, 361,
+		37, 348,
+		31, 235,
+		45, 223,
+		50, 227,
+		37, 242,
+		44, 265,
+		98, 287,
+		60, 356
+	};
+
+	// Pivot 0, 0 add
+	int Diagonal[10] = {
+		313, 264,
+		317, 259,
+		276, 217,
+		271, 221,
+		309, 261
+	};
+
+	// Pivot 0, 0 add
+	int BolaAbaix[24] = {
+		315, 224,
+		326, 221,
+		336, 213,
+		337, 203,
+		329, 193,
+		317, 190,
+		304, 192,
+		294, 199,
+		291, 208,
+		294, 217,
+		301, 221,
+		310, 223
+	};
+
+	// Pivot 0, 0
+	int BolaSuperiorEsquerre[22] = {
+		363, 153,
+		375, 152,
+		383, 146,
+		386, 136,
+		380, 126,
+		368, 122,
+		353, 123,
+		343, 130,
+		340, 142,
+		347, 148,
+		358, 153
+	};
+	// Pivot 0, 0
+	int BolaSuperiorEsquerra[22] = {
+		286, 156,
+		300, 151,
+		308, 143,
+		307, 130,
+		296, 122,
+		283, 120,
+		272, 125,
+		264, 133,
+		265, 143,
+		273, 150,
+		281, 155
+	};
+
+	// Pivot 0, 0
+	int PalDreta[8] = {
+		332, 83,
+		332, 59,
+		328, 59,
+		328, 83
+	};
+
+	// Pivot 0, 0
+	int PalEsquerra[8] = {
+		292, 82,
+		292, 58,
+		287, 58,
+		287, 82
+	};
+
+	// Pivot 0, 0
+	int CercleCantoSuperior[24] = {
+		85, 85,
+		96, 81,
+		106, 75,
+		109, 64,
+		103, 55,
+		94, 50,
+		79, 49,
+		69, 55,
+		62, 64,
+		63, 74,
+		72, 80,
+		80, 85
+	};
 
 
 	// Pivot 0, 0
@@ -220,7 +318,15 @@ App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
 App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
 App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
 App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
-	
+App->physics->CreateChain(0, 0, PaletaSuperior, 18, b2_staticBody);
+App->physics->CreateChain(0, 0, Diagonal, 10, b2_staticBody);
+App->physics->CreateChain(0, 0, BolaAbaix, 24, b2_staticBody);
+App->physics->CreateChain(0, 0, BolaSuperiorEsquerre, 22, b2_staticBody);
+App->physics->CreateChain(0, 0, BolaSuperiorEsquerra, 22, b2_staticBody);
+App->physics->CreateChain(0, 0, PalDreta, 8, b2_staticBody);
+App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
+App->physics->CreateChain(0, 0, CercleCantoSuperior, 24, b2_staticBody);
+
 
 	// Prepare for raycast ------------------------------------------------------
 	
