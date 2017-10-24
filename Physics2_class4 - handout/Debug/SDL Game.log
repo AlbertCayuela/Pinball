@@ -1,3 +1,30 @@
-﻿  ModulePlayer.cpp
-c:\program files (x86)\microsoft visual studio\2017\enterprise\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  SDL Game.vcxproj -> C:\Users\leix_\Desktop\Pinball\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
+﻿  ModuleWindow.cpp
+  ModuleTextures.cpp
+  ModuleSceneIntro.cpp
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(374): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(376): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(378): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(381): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(389): warning C4101: 'y': unreferenced local variable
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulesceneintro.cpp(389): warning C4101: 'x': unreferenced local variable
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  ModuleRender.cpp
+  ModulePlayer.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  ModulePhysics.cpp
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(122): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(123): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(378): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(379): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\aleixca1\documents\github\pinball\physics2_class4 - handout\modulephysics.cpp(385): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\cmath(113): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  ModuleInput.cpp
+  ModuleAudio.cpp
+  Main.cpp
+  log.cpp
+  Application.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  Generating Code...
+  SDL Game.vcxproj -> C:\Users\aleixca1\Documents\GitHub\Pinball\Physics2_class4 - handout\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\aleixca1\Documents\GitHub\Pinball\Physics2_class4 - handout\Debug\2D Physics - class 4.pdb (Partial PDB)
