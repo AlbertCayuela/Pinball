@@ -33,7 +33,7 @@ bool ModuleSceneIntro::Start()
 
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-	// Pivot 0, 0
+
 	int Paletadreta[16] = {
 		330, 709,
 		422, 638,
@@ -242,19 +242,51 @@ bool ModuleSceneIntro::Start()
 		478, 801
 	};
 
+	PhysBody* reboundhard;
+	PhysBody* reboundnormal;
+	PhysBody* rebound;
+
+	//Con rebote extra
+	reboundhard = App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
+	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard = App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
+	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard = App->physics->CreateChain(0, 0, BolaSuperiorEsquerra, 22, b2_staticBody);
+	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard = App->physics->CreateChain(0, 0, CercleCantoSuperior, 24, b2_staticBody);
+	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard = App->physics->CreateChain(0, 0, BolaAbaix, 24, b2_staticBody);
+	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+
+	reboundnormal = App->physics->CreateChain(0, 0, BolaSuperiorEsquerre, 22, b2_staticBody);
+	reboundnormal->body->GetFixtureList()->SetRestitution(1.5f);
+
+	//rebote normal
 	App->physics->CreateChain(0, 0, Captura, 132, b2_staticBody);
-	App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
-	App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
-	App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
-	App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
+
+	rebound=App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
+	rebound->body->GetFixtureList()->SetRestitution(0.1f);
+	
+	rebound=App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
+	rebound->body->GetFixtureList()->SetRestitution(0.1f);
+
+	
+
 	App->physics->CreateChain(0, 0, PaletaSuperior, 18, b2_staticBody);
 	App->physics->CreateChain(0, 0, Diagonal, 10, b2_staticBody);
-	App->physics->CreateChain(0, 0, BolaAbaix, 24, b2_staticBody);
-	App->physics->CreateChain(0, 0, BolaSuperiorEsquerre, 22, b2_staticBody);
-	App->physics->CreateChain(0, 0, BolaSuperiorEsquerra, 22, b2_staticBody);
+	
+	
+
+	
 	App->physics->CreateChain(0, 0, PalDreta, 8, b2_staticBody);
+	
 	App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
-	App->physics->CreateChain(0, 0, CercleCantoSuperior, 24, b2_staticBody);
+	
+
+	
+
+
+
 	return ret;
 }
 
@@ -319,8 +351,8 @@ update_status ModuleSceneIntro::Update()
 
 		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
 	}*/
+	// Pivot 0, 0
 	
-
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
