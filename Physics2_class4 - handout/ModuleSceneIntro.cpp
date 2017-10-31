@@ -282,6 +282,8 @@ bool ModuleSceneIntro::Start()
 	
 	App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
 	
+	App->physics->createFlipperR();
+	App->physics->createFlipperL();
 
 	
 
@@ -302,13 +304,37 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(background, 0, 0);
-	
-
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
 		circles.getLast()->data->listener = this;
 	}
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.getLast()->data->listener = this;
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		App->physics->sawBody->ApplyTorque(250.0, true);
+	}
+	else {
+		if (App->physics->sawBody->IsAwake()) {
+			App->physics->sawBody->ApplyTorque(-250.0, false);
+		}
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		App->physics->sawBody2->ApplyTorque(-250.0, true);
+	}
+	else {
+		if (App->physics->sawBody2->IsAwake()) {
+			App->physics->sawBody2->ApplyTorque(250.0, false);
+		}
+	}
+
 
 
 /* if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)

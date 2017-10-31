@@ -47,7 +47,11 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
 	PhysBody* CreateBoles(int x, int y, int radius);
-
+	b2Body* createFlipperL();
+	b2Body* createFlipperR();
+	b2Body* sawBody;
+	b2Body* sawBody2;
+	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 

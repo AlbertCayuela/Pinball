@@ -401,3 +401,89 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
 }
+
+b2Body* ModulePhysics::createFlipperR() {
+	b2BodyDef sawDef;
+	sawDef.type = b2_dynamicBody;
+	sawDef.position.Set(PIXEL_TO_METERS(390), PIXEL_TO_METERS(730));
+
+	sawBody = world->CreateBody(&sawDef);
+
+	b2PolygonShape box;
+	box.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
+
+	b2FixtureDef sawFixture;
+	sawFixture.shape = &box;
+	sawFixture.density = 2;
+	sawBody->CreateFixture(&sawFixture);
+
+	b2BodyDef circleBodyDef;
+	circleBodyDef.position.Set(PIXEL_TO_METERS(310), PIXEL_TO_METERS(730));
+	circleBodyDef.type = b2_staticBody;
+
+	b2Body* circle_body = world->CreateBody(&circleBodyDef);
+
+	b2CircleShape my_circle;
+	my_circle.m_radius = PIXEL_TO_METERS(1);
+	b2FixtureDef my_fixture;
+	my_fixture.shape = &my_circle;
+	circle_body->CreateFixture(&my_fixture);
+
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.bodyA = sawBody;
+	revoluteJointDef.bodyB = circle_body;
+	revoluteJointDef.localAnchorA.Set(0.5, 0);
+	revoluteJointDef.localAnchorB.Set(0, 0);
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.upperAngle = 25 * DEGTORAD;
+	revoluteJointDef.lowerAngle = -25 * DEGTORAD;
+	revoluteJointDef.maxMotorTorque = 10.0;
+	revoluteJointDef.motorSpeed = 5.0;
+	revoluteJointDef.enableMotor = true;
+	world->CreateJoint(&revoluteJointDef);
+
+	return sawBody;
+}
+
+b2Body* ModulePhysics::createFlipperL() {
+	b2BodyDef sawDef2;
+	sawDef2.type = b2_dynamicBody;
+	sawDef2.position.Set(PIXEL_TO_METERS(235), PIXEL_TO_METERS(730));
+
+	sawBody2 = world->CreateBody(&sawDef2);
+
+	b2PolygonShape box2;
+	box2.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
+
+	b2FixtureDef sawFixture2;
+	sawFixture2.shape = &box2;
+	sawFixture2.density = 2;
+	sawBody2->CreateFixture(&sawFixture2);
+
+	b2BodyDef circleBodyDef2;
+	circleBodyDef2.position.Set(PIXEL_TO_METERS(165), PIXEL_TO_METERS(730));
+	circleBodyDef2.type = b2_staticBody;
+
+	b2Body* circle_body2 = world->CreateBody(&circleBodyDef2);
+
+	b2CircleShape my_circle2;
+	my_circle2.m_radius = PIXEL_TO_METERS(1);
+	b2FixtureDef my_fixture2;
+	my_fixture2.shape = &my_circle2;
+	circle_body2->CreateFixture(&my_fixture2);
+
+	b2RevoluteJointDef revoluteJointDef2;
+	revoluteJointDef2.bodyA = sawBody2;
+	revoluteJointDef2.bodyB = circle_body2;
+	revoluteJointDef2.localAnchorA.Set(-0.5, 0);
+	revoluteJointDef2.localAnchorB.Set(0, 0);
+	revoluteJointDef2.enableLimit = true;
+	revoluteJointDef2.upperAngle = 25 * DEGTORAD;
+	revoluteJointDef2.lowerAngle = -25 * DEGTORAD;
+	revoluteJointDef2.maxMotorTorque = 10.0;
+	revoluteJointDef2.motorSpeed = 5.0;
+	revoluteJointDef2.enableMotor = true;
+	world->CreateJoint(&revoluteJointDef2);
+
+	return sawBody2;
+}
