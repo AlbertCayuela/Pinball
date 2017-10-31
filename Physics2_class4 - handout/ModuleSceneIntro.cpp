@@ -248,15 +248,15 @@ bool ModuleSceneIntro::Start()
 
 	//Con rebote extra
 	reboundhard = App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, BolaSuperiorEsquerra, 22, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, CercleCantoSuperior, 24, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, BolaAbaix, 24, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(2.0f);
+	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 
 	reboundnormal = App->physics->CreateChain(0, 0, BolaSuperiorEsquerre, 22, b2_staticBody);
 	reboundnormal->body->GetFixtureList()->SetRestitution(1.5f);
