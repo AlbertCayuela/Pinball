@@ -284,6 +284,7 @@ bool ModuleSceneIntro::Start()
 	
 	App->physics->createFlipperR();
 	App->physics->createFlipperL();
+	App->physics->createFlipperLT();
 
 	
 
@@ -328,10 +329,14 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
 		App->physics->sawBody2->ApplyTorque(-250.0, true);
+		App->physics->sawBody3->ApplyTorque(-250, true);
 	}
 	else {
 		if (App->physics->sawBody2->IsAwake()) {
 			App->physics->sawBody2->ApplyTorque(250.0, false);
+		}
+		if (App->physics->sawBody3->IsAwake()) {
+			App->physics->sawBody3->ApplyTorque(250.0, false);
 		}
 	}
 

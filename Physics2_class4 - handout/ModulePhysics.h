@@ -49,9 +49,10 @@ public:
 	PhysBody* CreateBoles(int x, int y, int radius);
 	b2Body* createFlipperL();
 	b2Body* createFlipperR();
+	b2Body* createFlipperLT();
 	b2Body* sawBody;
 	b2Body* sawBody2;
-	
+	b2Body* sawBody3;
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
