@@ -405,7 +405,7 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 b2Body* ModulePhysics::createFlipperR() {
 	b2BodyDef sawDef;
 	sawDef.type = b2_dynamicBody;
-	sawDef.position.Set(PIXEL_TO_METERS(390), PIXEL_TO_METERS(730));
+	sawDef.position.Set(PIXEL_TO_METERS(430), PIXEL_TO_METERS(730));
 
 	sawBody = world->CreateBody(&sawDef);
 
@@ -418,7 +418,7 @@ b2Body* ModulePhysics::createFlipperR() {
 	sawBody->CreateFixture(&sawFixture);
 
 	b2BodyDef circleBodyDef;
-	circleBodyDef.position.Set(PIXEL_TO_METERS(310), PIXEL_TO_METERS(730));
+	circleBodyDef.position.Set(PIXEL_TO_METERS(325), PIXEL_TO_METERS(730));
 	circleBodyDef.type = b2_staticBody;
 
 	b2Body* circle_body = world->CreateBody(&circleBodyDef);
@@ -448,7 +448,7 @@ b2Body* ModulePhysics::createFlipperR() {
 b2Body* ModulePhysics::createFlipperL() {
 	b2BodyDef sawDef2;
 	sawDef2.type = b2_dynamicBody;
-	sawDef2.position.Set(PIXEL_TO_METERS(235), PIXEL_TO_METERS(730));
+	sawDef2.position.Set(PIXEL_TO_METERS(230), PIXEL_TO_METERS(730));
 
 	sawBody2 = world->CreateBody(&sawDef2);
 
@@ -461,7 +461,7 @@ b2Body* ModulePhysics::createFlipperL() {
 	sawBody2->CreateFixture(&sawFixture2);
 
 	b2BodyDef circleBodyDef2;
-	circleBodyDef2.position.Set(PIXEL_TO_METERS(165), PIXEL_TO_METERS(730));
+	circleBodyDef2.position.Set(PIXEL_TO_METERS(160), PIXEL_TO_METERS(730));
 	circleBodyDef2.type = b2_staticBody;
 
 	b2Body* circle_body2 = world->CreateBody(&circleBodyDef2);
