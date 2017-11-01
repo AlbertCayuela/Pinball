@@ -393,19 +393,19 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 }
 
 b2Body* ModulePhysics::createFlipperR() {
-	b2BodyDef sawDef;
-	sawDef.type = b2_dynamicBody;
-	sawDef.position.Set(PIXEL_TO_METERS(430), PIXEL_TO_METERS(730));
+	b2BodyDef FlipperDef;
+	FlipperDef.type = b2_dynamicBody;
+	FlipperDef.position.Set(PIXEL_TO_METERS(430), PIXEL_TO_METERS(730));
 
-	cosflipper1 = world->CreateBody(&sawDef);
+	cosflipper1 = world->CreateBody(&FlipperDef);
 
 	b2PolygonShape box;
 	box.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
 
-	b2FixtureDef sawFixture;
-	sawFixture.shape = &box;
-	sawFixture.density = 2;
-	cosflipper1->CreateFixture(&sawFixture);
+	b2FixtureDef flipperFixture;
+	flipperFixture.shape = &box;
+	flipperFixture.density = 2;
+	cosflipper1->CreateFixture(&flipperFixture);
 
 	b2BodyDef circleBodyDef;
 	circleBodyDef.position.Set(PIXEL_TO_METERS(325), PIXEL_TO_METERS(730));
@@ -436,19 +436,19 @@ b2Body* ModulePhysics::createFlipperR() {
 }
 
 b2Body* ModulePhysics::createFlipperL() {
-	b2BodyDef sawDef2;
-	sawDef2.type = b2_dynamicBody;
-	sawDef2.position.Set(PIXEL_TO_METERS(230), PIXEL_TO_METERS(730));
+	b2BodyDef Flipper2Def;
+	Flipper2Def.type = b2_dynamicBody;
+	Flipper2Def.position.Set(PIXEL_TO_METERS(230), PIXEL_TO_METERS(730));
 
-	cosflipper2 = world->CreateBody(&sawDef2);
+	cosflipper2 = world->CreateBody(&Flipper2Def);
 
 	b2PolygonShape box2;
 	box2.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
 
-	b2FixtureDef sawFixture2;
-	sawFixture2.shape = &box2;
-	sawFixture2.density = 2;
-	cosflipper2->CreateFixture(&sawFixture2);
+	b2FixtureDef Flipper2Fixture;
+	Flipper2Fixture.shape = &box2;
+	Flipper2Fixture.density = 2;
+	cosflipper2->CreateFixture(&Flipper2Fixture);
 
 	b2BodyDef circleBodyDef2;
 	circleBodyDef2.position.Set(PIXEL_TO_METERS(160), PIXEL_TO_METERS(730));
@@ -478,19 +478,19 @@ b2Body* ModulePhysics::createFlipperL() {
 	return cosflipper2;
 }
 b2Body* ModulePhysics::createFlipperLT() {
-	b2BodyDef sawDef3;
-	sawDef3.type = b2_dynamicBody;
-	sawDef3.position.Set(PIXEL_TO_METERS(125), PIXEL_TO_METERS(250));
+	b2BodyDef Fillper3Def;
+	Fillper3Def.type = b2_dynamicBody;
+	Fillper3Def.position.Set(PIXEL_TO_METERS(125), PIXEL_TO_METERS(250));
 
-	cosflipper3 = world->CreateBody(&sawDef3);
+	cosflipper3 = world->CreateBody(&Fillper3Def);
 
 	b2PolygonShape box3;
 	box3.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
 
-	b2FixtureDef sawFixture3;
-	sawFixture3.shape = &box3;
-	sawFixture3.density = 2;
-	cosflipper3->CreateFixture(&sawFixture3);
+	b2FixtureDef Flipper3Fixture;
+	Flipper3Fixture.shape = &box3;
+	Flipper3Fixture.density = 2;
+	cosflipper3->CreateFixture(&Flipper3Fixture);
 
 	b2BodyDef circleBodyDef3;
 	circleBodyDef3.position.Set(PIXEL_TO_METERS(65), PIXEL_TO_METERS(250));
