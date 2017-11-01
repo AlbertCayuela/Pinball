@@ -50,19 +50,16 @@ public:
 	b2Body* createFlipperL();
 	b2Body* createFlipperR();
 	b2Body* createFlipperLT();
-	b2Body* createSpring();
 	b2Body* cosflipper1;
 	b2Body* cosflipper2;
 	b2Body* cosflipper3;
-	b2Body* muelle;
-	b2World* world;
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
 private:
 
 	bool debug;
-
+	b2World* world;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
 

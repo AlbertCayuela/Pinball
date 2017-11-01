@@ -26,12 +26,12 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	background = App->textures->Load("pinball/captura.png");
-	circle = App->textures->Load("pinball/wheel.png");
+	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-
+	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	int Paletadreta[16] = {
@@ -173,90 +173,74 @@ bool ModuleSceneIntro::Start()
 
 
 	// Pivot 0, 0
-	int Captura[160] = {
-		434, 493,
-		428, 445,
-		402, 393,
-		401, 306,
-		428, 274,
-		426, 268,
-		428, 263,
-		428, 255,
-		424, 249,
-		418, 245,
-		413, 244,
-		404, 248,
-		397, 253,
-		394, 246,
-		430, 203,
-		433, 68,
-		416, 52,
-		392, 41,
-		376, 57,
-		374, 84,
-		367, 84,
-		368, 60,
-		384, 40,
-		396, 37,
-		420, 47,
-		436, 64,
-		432, 436,
-		434, 495,
-		479, 525,
-		478, 63,
-		465, 37,
-		446, 19,
-		421, 7,
-		392, 1,
-		358, 1,
-		310, 5,
-		280, 13,
-		259, 32,
-		253, 81,
-		246, 80,
-		222, 57,
-		221, 29,
-		216, 20,
-		208, 15,
-		201, 13,
-		195, 17,
-		189, 26,
-		187, 40,
+	int Captura[132] = {
+		307, 800,
+		476, 671,
+		477, 522,
+		432, 483,
+		430, 448,
+		402, 394,
+		402, 307,
+		426, 271,
+		402, 246,
+		431, 204,
+		430, 65,
+		394, 40,
+		371, 58,
+		373, 82,
+		363, 82,
+		362, 59,
+		393, 33,
+		436, 63,
+		432, 439,
+		477, 439,
+		477, 61,
+		461, 36,
+		437, 15,
+		409, 2,
+		321, -1,
+		292, 8,
+		268, 18,
+		250, 36,
+		251, 77,
+		225, 56,
+		221, 35,
+		218, 25,
+		214, 19,
+		207, 15,
+		198, 16,
+		192, 20,
+		190, 28,
+		189, 38,
 		186, 60,
-		167, 61,
-		158, 42,
-		145, 26,
-		129, 14,
-		107, 6,
-		88, 3,
-		62, 6,
-		45, 13,
-		28, 25,
-		14, 38,
-		-1, 61,
-		-1, 358,
-		13, 396,
-		32, 438,
-		57, 463,
-		60, 478,
+		167, 60,
+		149, 31,
+		135, 20,
+		116, 8,
+		96, 2,
+		67, 3,
+		44, 10,
+		26, 23,
+		15, 34,
+		8, 47,
+		0, 61,
+		0, 359,
+		12, 390,
+		23, 420,
+		36, 442,
+		60, 460,
+		59, 479,
 		0, 520,
-		1, 736,
-		25, 738,
-		37, 729,
-		38, 716,
-		38, 697,
-		170, 798,
-		4, 804,
-		1, 1020,
-		498, 1013,
-		480, 804,
-		304, 806,
-		475, 670,
-		479, 526,
-		438, 494
+		0, 739,
+		27, 736,
+		38, 724,
+		40, 696,
+		168, 800,
+		0, 797,
+		-4, 1111,
+		482, 1085,
+		478, 801
 	};
-
-
 
 	PhysBody* reboundhard;
 	PhysBody* reboundnormal;
@@ -278,31 +262,31 @@ bool ModuleSceneIntro::Start()
 	reboundnormal->body->GetFixtureList()->SetRestitution(1.5f);
 
 	//rebote normal
-	App->physics->CreateChain(0, 0, Captura, 160, b2_staticBody);
+	App->physics->CreateChain(0, 0, Captura, 132, b2_staticBody);
 
-	rebound = App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
+	rebound=App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
+	rebound->body->GetFixtureList()->SetRestitution(0.1f);
+	
+	rebound=App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
 	rebound->body->GetFixtureList()->SetRestitution(0.1f);
 
-	rebound = App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
-	rebound->body->GetFixtureList()->SetRestitution(0.1f);
-
-
+	
 
 	App->physics->CreateChain(0, 0, PaletaSuperior, 18, b2_staticBody);
 	App->physics->CreateChain(0, 0, Diagonal, 10, b2_staticBody);
+	
+	
 
-
-
-
+	
 	App->physics->CreateChain(0, 0, PalDreta, 8, b2_staticBody);
-
+	
 	App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
-
+	
 	App->physics->createFlipperR();
 	App->physics->createFlipperL();
 	App->physics->createFlipperLT();
-	App->physics->createSpring();
 
+	
 
 
 
@@ -356,61 +340,52 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+
+
+/* if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
 	{
-		App->physics->muelle->ApplyForce(b2Vec2(0, -250), App->physics->muelle->GetLocalCenter(), true);
-	}
-	else {
-		if (App->physics->muelle->IsAwake()) {
-			App->physics->muelle->ApplyForce(b2Vec2(0, 250), App->physics->muelle->GetLocalCenter(), true);
-		}
-	}
+		// Pivot 0, 0
+		int rick_head[64] = {
+			14, 36,
+			42, 40,
+			40, 0,
+			75, 30,
+			88, 4,
+			94, 39,
+			111, 36,
+			104, 58,
+			107, 62,
+			117, 67,
+			109, 73,
+			110, 85,
+			106, 91,
+			109, 99,
+			103, 104,
+			100, 115,
+			106, 121,
+			103, 125,
+			98, 126,
+			95, 137,
+			83, 147,
+			67, 147,
+			53, 140,
+			46, 132,
+			34, 136,
+			38, 126,
+			23, 123,
+			30, 114,
+			10, 102,
+			29, 90,
+			0, 75,
+			30, 62
+		};
 
-
-	/* if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-	// Pivot 0, 0
-	int rick_head[64] = {
-	14, 36,
-	42, 40,
-	40, 0,
-	75, 30,
-	88, 4,
-	94, 39,
-	111, 36,
-	104, 58,
-	107, 62,
-	117, 67,
-	109, 73,
-	110, 85,
-	106, 91,
-	109, 99,
-	103, 104,
-	100, 115,
-	106, 121,
-	103, 125,
-	98, 126,
-	95, 137,
-	83, 147,
-	67, 147,
-	53, 140,
-	46, 132,
-	34, 136,
-	38, 126,
-	23, 123,
-	30, 114,
-	10, 102,
-	29, 90,
-	0, 75,
-	30, 62
-	};
-
-	ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
+		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
 	}*/
 	// Pivot 0, 0
-
+	
 	// Prepare for raycast ------------------------------------------------------
-
+	
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
@@ -421,26 +396,26 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
-		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
+		if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
 			App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
 	c = boxes.getFirst();
 
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		if (ray_on)
+		if(ray_on)
 		{
 			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if (hit >= 0)
+			if(hit >= 0)
 				ray_hit = hit;
 		}
 		c = c->next;
@@ -448,7 +423,7 @@ update_status ModuleSceneIntro::Update()
 
 	c = ricks.getFirst();
 
-	while (c != NULL)
+	while(c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -457,15 +432,15 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	// ray -----------------
-	if (ray_on == true)
+	if(ray_on == true)
 	{
-		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
+		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
 		destination.Normalize();
 		destination *= ray_hit;
 
 		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
-		if (normal.x != 0.0f)
+		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
@@ -481,13 +456,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	/*
 	if(bodyA)
 	{
-	bodyA->GetPosition(x, y);
-	App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+		bodyA->GetPosition(x, y);
+		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}
 
 	if(bodyB)
 	{
-	bodyB->GetPosition(x, y);
-	App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+		bodyB->GetPosition(x, y);
+		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
 }

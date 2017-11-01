@@ -47,10 +47,10 @@ update_status ModulePlayer::Update()
 
 		}
 
-		//if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 
-		//	boles.getFirst()->data->body->ApplyLinearImpulse({ 0, -10 }, { 0, 0 }, true);
-		//}
+			boles.getFirst()->data->body->ApplyLinearImpulse({ 0, -10 }, { 0, 0 }, true);
+		}
 		p2List_item<PhysBody*>* rip = boles.getFirst();
 
 
