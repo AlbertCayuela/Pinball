@@ -317,16 +317,6 @@ update_status ModulePhysics::PostUpdate()
 }
 
 
-// Called before quitting
-bool ModulePhysics::CleanUp()
-{
-	LOG("Destroying physics world");
-
-	// Delete the whole physics world!
-	delete world;
-
-	return true;
-}
 
 void PhysBody::GetPosition(int& x, int &y) const
 {
@@ -407,7 +397,7 @@ b2Body* ModulePhysics::createFlipperR() {
 	sawDef.type = b2_dynamicBody;
 	sawDef.position.Set(PIXEL_TO_METERS(430), PIXEL_TO_METERS(730));
 
-	sawBody = world->CreateBody(&sawDef);
+	cosflipper1 = world->CreateBody(&sawDef);
 
 	b2PolygonShape box;
 	box.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
@@ -415,7 +405,7 @@ b2Body* ModulePhysics::createFlipperR() {
 	b2FixtureDef sawFixture;
 	sawFixture.shape = &box;
 	sawFixture.density = 2;
-	sawBody->CreateFixture(&sawFixture);
+	cosflipper1->CreateFixture(&sawFixture);
 
 	b2BodyDef circleBodyDef;
 	circleBodyDef.position.Set(PIXEL_TO_METERS(325), PIXEL_TO_METERS(730));
@@ -430,7 +420,7 @@ b2Body* ModulePhysics::createFlipperR() {
 	circle_body->CreateFixture(&my_fixture);
 
 	b2RevoluteJointDef revoluteJointDef;
-	revoluteJointDef.bodyA = sawBody;
+	revoluteJointDef.bodyA = cosflipper1;
 	revoluteJointDef.bodyB = circle_body;
 	revoluteJointDef.localAnchorA.Set(0.5, 0);
 	revoluteJointDef.localAnchorB.Set(0, 0);
@@ -442,7 +432,7 @@ b2Body* ModulePhysics::createFlipperR() {
 	revoluteJointDef.enableMotor = true;
 	world->CreateJoint(&revoluteJointDef);
 
-	return sawBody;
+	return cosflipper1;
 }
 
 b2Body* ModulePhysics::createFlipperL() {
@@ -450,7 +440,7 @@ b2Body* ModulePhysics::createFlipperL() {
 	sawDef2.type = b2_dynamicBody;
 	sawDef2.position.Set(PIXEL_TO_METERS(230), PIXEL_TO_METERS(730));
 
-	sawBody2 = world->CreateBody(&sawDef2);
+	cosflipper2 = world->CreateBody(&sawDef2);
 
 	b2PolygonShape box2;
 	box2.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
@@ -458,7 +448,7 @@ b2Body* ModulePhysics::createFlipperL() {
 	b2FixtureDef sawFixture2;
 	sawFixture2.shape = &box2;
 	sawFixture2.density = 2;
-	sawBody2->CreateFixture(&sawFixture2);
+	cosflipper2->CreateFixture(&sawFixture2);
 
 	b2BodyDef circleBodyDef2;
 	circleBodyDef2.position.Set(PIXEL_TO_METERS(160), PIXEL_TO_METERS(730));
@@ -473,7 +463,7 @@ b2Body* ModulePhysics::createFlipperL() {
 	circle_body2->CreateFixture(&my_fixture2);
 
 	b2RevoluteJointDef revoluteJointDef2;
-	revoluteJointDef2.bodyA = sawBody2;
+	revoluteJointDef2.bodyA = cosflipper2;
 	revoluteJointDef2.bodyB = circle_body2;
 	revoluteJointDef2.localAnchorA.Set(-0.5, 0);
 	revoluteJointDef2.localAnchorB.Set(0, 0);
@@ -485,14 +475,14 @@ b2Body* ModulePhysics::createFlipperL() {
 	revoluteJointDef2.enableMotor = true;
 	world->CreateJoint(&revoluteJointDef2);
 
-	return sawBody2;
+	return cosflipper2;
 }
 b2Body* ModulePhysics::createFlipperLT() {
 	b2BodyDef sawDef3;
 	sawDef3.type = b2_dynamicBody;
 	sawDef3.position.Set(PIXEL_TO_METERS(125), PIXEL_TO_METERS(250));
 
-	sawBody3 = world->CreateBody(&sawDef3);
+	cosflipper3 = world->CreateBody(&sawDef3);
 
 	b2PolygonShape box3;
 	box3.SetAsBox(PIXEL_TO_METERS(75) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
@@ -500,7 +490,7 @@ b2Body* ModulePhysics::createFlipperLT() {
 	b2FixtureDef sawFixture3;
 	sawFixture3.shape = &box3;
 	sawFixture3.density = 2;
-	sawBody3->CreateFixture(&sawFixture3);
+	cosflipper3->CreateFixture(&sawFixture3);
 
 	b2BodyDef circleBodyDef3;
 	circleBodyDef3.position.Set(PIXEL_TO_METERS(65), PIXEL_TO_METERS(250));
@@ -515,7 +505,7 @@ b2Body* ModulePhysics::createFlipperLT() {
 	circle_body3->CreateFixture(&my_fixture3);
 
 	b2RevoluteJointDef revoluteJointDef3;
-	revoluteJointDef3.bodyA = sawBody3;
+	revoluteJointDef3.bodyA = cosflipper3;
 	revoluteJointDef3.bodyB = circle_body3;
 	revoluteJointDef3.localAnchorA.Set(-0.5, 0);
 	revoluteJointDef3.localAnchorB.Set(0, 0);
@@ -527,5 +517,16 @@ b2Body* ModulePhysics::createFlipperLT() {
 	revoluteJointDef3.enableMotor = true;
 	world->CreateJoint(&revoluteJointDef3);
 
-	return sawBody3;
+	return cosflipper3;
+}
+
+// Called before quitting
+bool ModulePhysics::CleanUp()
+{
+	LOG("Destroying physics world");
+
+	// Delete the whole physics world!
+	delete world;
+
+	return true;
 }

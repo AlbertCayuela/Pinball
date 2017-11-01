@@ -50,9 +50,9 @@ public:
 	b2Body* createFlipperL();
 	b2Body* createFlipperR();
 	b2Body* createFlipperLT();
-	b2Body* sawBody;
-	b2Body* sawBody2;
-	b2Body* sawBody3;
+	b2Body* cosflipper1;
+	b2Body* cosflipper2;
+	b2Body* cosflipper3;
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 

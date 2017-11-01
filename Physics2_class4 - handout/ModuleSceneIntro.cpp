@@ -318,25 +318,25 @@ update_status ModuleSceneIntro::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		App->physics->sawBody->ApplyTorque(250.0, true);
+		App->physics->cosflipper1->ApplyTorque(250.0, true);
 	}
 	else {
-		if (App->physics->sawBody->IsAwake()) {
-			App->physics->sawBody->ApplyTorque(-250.0, false);
+		if (App->physics->cosflipper1->IsAwake()) {
+			App->physics->cosflipper1->ApplyTorque(-250.0, false);
 		}
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		App->physics->sawBody2->ApplyTorque(-250.0, true);
-		App->physics->sawBody3->ApplyTorque(-250, true);
+		App->physics->cosflipper2->ApplyTorque(-250.0, true);
+		App->physics->cosflipper3->ApplyTorque(-250, true);
 	}
 	else {
-		if (App->physics->sawBody2->IsAwake()) {
-			App->physics->sawBody2->ApplyTorque(250.0, false);
+		if (App->physics->cosflipper2->IsAwake()) {
+			App->physics->cosflipper2->ApplyTorque(250.0, false);
 		}
-		if (App->physics->sawBody3->IsAwake()) {
-			App->physics->sawBody3->ApplyTorque(250.0, false);
+		if (App->physics->cosflipper3->IsAwake()) {
+			App->physics->cosflipper3->ApplyTorque(250.0, false);
 		}
 	}
 
