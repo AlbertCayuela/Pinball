@@ -519,6 +519,53 @@ b2Body* ModulePhysics::createFlipperLT() {
 
 	return cosflipper3;
 }
+b2Body* ModulePhysics::createSpring() {
+	b2BodyDef muelledef;
+	muelledef.type = b2_dynamicBody;
+	muelledef.position.Set(PIXEL_TO_METERS(450), PIXEL_TO_METERS(455));
+
+	muelle = world->CreateBody(&muelledef);
+
+	b2PolygonShape box3;
+	box3.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
+
+	b2FixtureDef muelleFixture3;
+	muelleFixture3.shape = &box3;
+	muelleFixture3.density = 2;
+	muelle->CreateFixture(&muelleFixture3);
+
+	b2BodyDef quad2;
+	quad2.position.Set(PIXEL_TO_METERS(450), PIXEL_TO_METERS(455));
+	quad2.type = b2_staticBody;
+
+	b2Body* quad2body = world->CreateBody(&quad2);
+
+	b2PolygonShape my_quad2;
+	my_quad2.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(20) * 0.5f);
+	b2FixtureDef my_fixture2;
+	my_fixture2.shape = &my_quad2;
+	quad2body->CreateFixture(&my_fixture2);
+
+	b2PrismaticJointDef prismaticJointDef;
+	prismaticJointDef.bodyA = quad2body;
+	prismaticJointDef.bodyB = muelle;
+	prismaticJointDef.collideConnected = false;
+	prismaticJointDef.localAxisA.Set(0, 1);
+	prismaticJointDef.localAxisA.Normalize();
+	prismaticJointDef.localAnchorA.Set(0, 0);
+	prismaticJointDef.localAnchorB.Set(0, 0);
+	prismaticJointDef.enableLimit = true;
+	prismaticJointDef.lowerTranslation = -1.0;
+	prismaticJointDef.upperTranslation = 1.0;
+	prismaticJointDef.referenceAngle = 0 * DEGTORAD;
+	prismaticJointDef.enableMotor = true;
+	prismaticJointDef.maxMotorForce = 200;
+	prismaticJointDef.motorSpeed = -200;
+	world->CreateJoint(&prismaticJointDef);
+
+	return muelle;
+}
+
 
 // Called before quitting
 bool ModulePhysics::CleanUp()
