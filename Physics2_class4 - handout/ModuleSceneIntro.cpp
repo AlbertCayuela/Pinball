@@ -176,73 +176,87 @@ bool ModuleSceneIntro::Start()
 
 
 	// Pivot 0, 0
-	int Captura[132] = {
-		307, 800,
-		476, 671,
-		477, 522,
-		432, 483,
-		430, 448,
-		402, 394,
-		402, 307,
-		426, 271,
-		402, 246,
-		431, 204,
-		430, 65,
-		394, 40,
-		371, 58,
-		373, 82,
-		363, 82,
-		362, 59,
-		393, 33,
-		436, 63,
-		432, 439,
-		477, 439,
-		477, 61,
-		461, 36,
-		437, 15,
-		409, 2,
-		321, -1,
-		292, 8,
-		268, 18,
-		250, 36,
-		251, 77,
-		225, 56,
-		221, 35,
-		218, 25,
-		214, 19,
-		207, 15,
-		198, 16,
-		192, 20,
-		190, 28,
-		189, 38,
+	int Captura[160] = {
+		434, 493,
+		428, 445,
+		402, 393,
+		401, 306,
+		428, 274,
+		426, 268,
+		428, 263,
+		428, 255,
+		424, 249,
+		418, 245,
+		413, 244,
+		404, 248,
+		397, 253,
+		394, 246,
+		430, 203,
+		433, 68,
+		416, 52,
+		392, 41,
+		376, 57,
+		374, 84,
+		367, 84,
+		368, 60,
+		384, 40,
+		396, 37,
+		420, 47,
+		436, 64,
+		432, 436,
+		434, 495,
+		479, 525,
+		478, 63,
+		465, 37,
+		446, 19,
+		421, 7,
+		392, 1,
+		358, 1,
+		310, 5,
+		280, 13,
+		259, 32,
+		253, 81,
+		246, 80,
+		222, 57,
+		221, 29,
+		216, 20,
+		208, 15,
+		201, 13,
+		195, 17,
+		189, 26,
+		187, 40,
 		186, 60,
-		167, 60,
-		149, 31,
-		135, 20,
-		116, 8,
-		96, 2,
-		67, 3,
-		44, 10,
-		26, 23,
-		15, 34,
-		8, 47,
-		0, 61,
-		0, 359,
-		12, 390,
-		23, 420,
-		36, 442,
-		60, 460,
-		59, 479,
+		167, 61,
+		158, 42,
+		145, 26,
+		129, 14,
+		107, 6,
+		88, 3,
+		62, 6,
+		45, 13,
+		28, 25,
+		14, 38,
+		-1, 61,
+		-1, 358,
+		13, 396,
+		32, 438,
+		57, 463,
+		60, 478,
 		0, 520,
-		0, 739,
-		27, 736,
-		38, 724,
-		40, 696,
-		168, 800,
-		0, 797,
-		-4, 1111,
-		482, 1085,
-		478, 801
+		1, 736,
+		25, 738,
+		37, 729,
+		38, 716,
+		38, 697,
+		170, 798,
+		4, 804,
+		1, 1020,
+		498, 1013,
+		480, 804,
+		304, 806,
+		475, 670,
+		479, 526,
+		438, 494
 	};
 
 	PhysBody* reboundhard;
@@ -265,7 +279,7 @@ bool ModuleSceneIntro::Start()
 	reboundnormal->body->GetFixtureList()->SetRestitution(1.5f);
 
 	//rebote normal
-	App->physics->CreateChain(0, 0, Captura, 132, b2_staticBody);
+	App->physics->CreateChain(0, 0, Captura, 160, b2_staticBody);
 
 	rebound=App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
 	rebound->body->GetFixtureList()->SetRestitution(0.1f);
@@ -288,7 +302,7 @@ bool ModuleSceneIntro::Start()
 	App->physics->createFlipperR();
 	App->physics->createFlipperL();
 	App->physics->createFlipperLT();
-
+	App->physics->createSpring();
 	
 
 
@@ -340,6 +354,15 @@ update_status ModuleSceneIntro::Update()
 		}
 		if (App->physics->cosflipper3->IsAwake()) {
 			App->physics->cosflipper3->ApplyTorque(250.0, false);
+		}
+	}
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	{
+		App->physics->muelle->ApplyForce(b2Vec2(0, -250), App->physics->muelle->GetLocalCenter(), true);
+	}
+	else {
+		if (App->physics->muelle->IsAwake()) {
+			App->physics->muelle->ApplyForce(b2Vec2(0, 250), App->physics->muelle->GetLocalCenter(), true);
 		}
 	}
 
