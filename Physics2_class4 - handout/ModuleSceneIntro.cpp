@@ -12,6 +12,8 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	circle = box = rick = NULL;
 	ray_on = false;
 	sensed = false;
+
+	Bola.PushBack({ 92,107,30,30 });
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -25,6 +27,7 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	spritesheet = App->textures->Load("pinball/spritesheet.png");
 	background = App->textures->Load("pinball/captura.png");
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -340,49 +343,6 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-
-
-/* if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		// Pivot 0, 0
-		int rick_head[64] = {
-			14, 36,
-			42, 40,
-			40, 0,
-			75, 30,
-			88, 4,
-			94, 39,
-			111, 36,
-			104, 58,
-			107, 62,
-			117, 67,
-			109, 73,
-			110, 85,
-			106, 91,
-			109, 99,
-			103, 104,
-			100, 115,
-			106, 121,
-			103, 125,
-			98, 126,
-			95, 137,
-			83, 147,
-			67, 147,
-			53, 140,
-			46, 132,
-			34, 136,
-			38, 126,
-			23, 123,
-			30, 114,
-			10, 102,
-			29, 90,
-			0, 75,
-			30, 62
-		};
-
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
-	}*/
-	// Pivot 0, 0
 	
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -398,10 +358,11 @@ update_status ModuleSceneIntro::Update()
 
 	while(c != NULL)
 	{
+		currentanimation = &Bola;
 		int x, y;
 		c->data->GetPosition(x, y);
 		if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-			App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
+			App->renderer->Blit(spritesheet, x, y, &(currentanimation->GetCurrentFrame()), 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
