@@ -17,8 +17,7 @@ public:
 	bool CleanUp();
 
 public:
-	p2List<PhysBody*> boles;
-	SDL_Texture* bola;
+	
 	int vides = 4;
 
 	bool creacioboles = false;

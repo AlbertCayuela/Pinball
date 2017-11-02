@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -24,17 +25,18 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
+	colision = true;
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	spritesheet = App->textures->Load("pinball/spritesheet.png");
 	background = App->textures->Load("pinball/captura.png");
-	circle = App->textures->Load("pinball/wheel.png"); 
+	circle = App->textures->Load("pinball/wheel.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-	
+
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	int Paletadreta[16] = {
@@ -281,29 +283,29 @@ bool ModuleSceneIntro::Start()
 	//rebote normal
 	App->physics->CreateChain(0, 0, Captura, 160, b2_staticBody);
 
-	rebound=App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
-	rebound->body->GetFixtureList()->SetRestitution(0.1f);
-	
-	rebound=App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
+	rebound = App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
 	rebound->body->GetFixtureList()->SetRestitution(0.1f);
 
-	
+	rebound = App->physics->CreateChain(0, 0, Paletaesquerra, 16, b2_staticBody);
+	rebound->body->GetFixtureList()->SetRestitution(0.1f);
+
+
 
 	App->physics->CreateChain(0, 0, PaletaSuperior, 18, b2_staticBody);
 	App->physics->CreateChain(0, 0, Diagonal, 10, b2_staticBody);
-	
-	
 
-	
+
+
+
 	App->physics->CreateChain(0, 0, PalDreta, 8, b2_staticBody);
-	
+
 	App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
-	
+
 	App->physics->createFlipperR();
 	App->physics->createFlipperL();
 	App->physics->createFlipperLT();
 	App->physics->createSpring();
-	
+
 
 
 
@@ -324,14 +326,10 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background, 0, 0);
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 30));
 		circles.getLast()->data->listener = this;
 	}
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-		circles.getLast()->data->listener = this;
-	}
+
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
@@ -366,9 +364,57 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-	
-	// Prepare for raycast ------------------------------------------------------
-	
+
+	if (colision == true) {
+
+
+
+
+
+		if (App->player->vides <= 4 && colision == true && App->player->vides > 0) {
+
+			circles.add(App->physics->CreateCircle(446, 420, 30));
+			circles.getLast()->data->listener = this;
+			colision = false;
+			App->player->vides--;
+
+		}
+	}
+		/*if (App->player->vides == 3 && colision == true) {
+
+			circles.add(App->physics->CreateCircle(446, 420, 30));
+			circles.getLast()->data->listener = this;
+			colision = false;
+
+			App->player->vides--;
+
+		}
+
+		if (App->player->vides == 2 && colision == true) {
+
+			circles.add(App->physics->CreateCircle(446, 420, 30));
+			circles.getLast()->data->listener = this;
+			colision = false;
+			App->player->vides--;
+
+		}
+		if (App->player->vides == 1 && colision == true) {
+
+			circles.add(App->physics->CreateCircle(446, 420, 30));
+			circles.getLast()->data->listener = this;
+			colision = false;
+			App->player->vides--;
+
+		}
+	}*/
+	//else if (creacioboles == false && vides < 3 && vides > 0) {
+	//	boles.add(App->physics->CreateCircle(442, 414, 40));
+
+	//	creacioboles = true;
+
+	//}
+	//// Prepare for raycast ------------------------------------------------------
+
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
@@ -379,27 +425,27 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
-	while(c != NULL)
+	while (c != NULL)
 	{
 		currentanimation = &Bola;
 		int x, y;
 		c->data->GetPosition(x, y);
-		if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
+		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
 			App->renderer->Blit(spritesheet, x, y, &(currentanimation->GetCurrentFrame()), 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
 	c = boxes.getFirst();
 
-	while(c != NULL)
+	while (c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		if(ray_on)
+		if (ray_on)
 		{
 			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if(hit >= 0)
+			if (hit >= 0)
 				ray_hit = hit;
 		}
 		c = c->next;
@@ -407,7 +453,7 @@ update_status ModuleSceneIntro::Update()
 
 	c = ricks.getFirst();
 
-	while(c != NULL)
+	while (c != NULL)
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
@@ -416,15 +462,15 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	// ray -----------------
-	if(ray_on == true)
+	if (ray_on == true)
 	{
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
+		fVector destination(mouse.x - ray.x, mouse.y - ray.y);
 		destination.Normalize();
 		destination *= ray_hit;
 
 		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
 
-		if(normal.x != 0.0f)
+		if (normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
@@ -437,16 +483,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 	App->audio->PlayFx(bonus_fx);
 
-	/*
-	if(bodyA)
+
+	/*if(bodyA)
 	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+	bodyA->GetPosition(x, y);
+	App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
+	}
+	*/
+	if (bodyB == sensor)
+	{
+
+		colision = true;
+
 	}
 
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 }

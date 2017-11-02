@@ -22,7 +22,7 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
-
+	
 	PhysBody* sensor;
 	bool sensed;
 
@@ -37,4 +37,6 @@ public:
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+	bool colision = false;
+	int cont = 0;
 };
