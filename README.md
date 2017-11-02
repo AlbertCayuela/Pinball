@@ -6,10 +6,10 @@ This is the Droid pinball, one type of the most played video game known as pinba
 This game takes as a model the Droid pinball game that can be found at the following link https://www.classicgame.com/game/Pinball+Droid.
 
 ## Members
-Aleix Castillo Arrià 
+Aleix Castillo Arrià,
 Albert Cayuela Naval
 
-#Inputs
+# Inputs
 
 ### Keybord Inputs
 
