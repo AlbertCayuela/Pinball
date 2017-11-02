@@ -43,10 +43,10 @@ public:
 	bool CleanUp();
 
 	PhysBody* CreateCircle(int x, int y, int radius);
-	PhysBody* CreateRectangle(int x, int y, int width, int height);
+	PhysBody* CreateRectangle(int x, int y, int width, int height, float angle);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
-	PhysBody* CreateBoles(int x, int y, int radius);
+	
 	b2Body* createFlipperL();
 	b2Body* createFlipperR();
 	b2Body* createFlipperLT();

@@ -24,6 +24,7 @@ public:
 	p2List<PhysBody*> ricks;
 	
 	PhysBody* sensor;
+	PhysBody* sensor2;
 	bool sensed;
 
 	Animation Bola;
@@ -38,5 +39,8 @@ public:
 	p2Point<int> ray;
 	bool ray_on;
 	bool colision = false;
+	bool colisionx20 = false;
+	bool rectanglex20 = false;
 	int cont = 0;
+	uint currentime, lastime, lastime2;
 };
