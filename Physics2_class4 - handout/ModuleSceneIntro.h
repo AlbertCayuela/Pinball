@@ -62,6 +62,7 @@ public:
 	bool colisionx20 = false;
 	bool rectanglex20 = false;
 	bool colisions345 = false;
+	bool colisionllum = false;
 	int cont = 0;
 	uint currentime, lastime, currentime2, lastime2;
 };
