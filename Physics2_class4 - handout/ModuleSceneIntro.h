@@ -23,6 +23,7 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 	
+	//sensores
 	PhysBody* sensor;
 	PhysBody* sensor2;
 	PhysBody* sensor3;
@@ -44,11 +45,22 @@ public:
 	PhysBody* sensorfletxaadaltesquerra;
 	PhysBody* sensorfletxaadaltdreta;
 	PhysBody* sensorfletxadretaabaix;
+	PhysBody* BolaEsquina;
+	PhysBody* BolaSuperior;
+	PhysBody* BolaDreta;
+	PhysBody* BolaInferior;
 
 	bool sensed;
+	bool bolaEsquina = false;
+	bool bolaSuperior = false;
+	bool bolaDreta = false;
+	bool bolaInferior = false;
 
 	Animation Bola;
+	Animation Bolas;
+
 	Animation* currentanimation = nullptr;
+	Animation* currentanimation1 = nullptr;
 
 	SDL_Texture* spritesheet;
 	SDL_Texture* background;
@@ -57,11 +69,18 @@ public:
 	SDL_Texture* rick;
 	uint bonus_fx;
 	p2Point<int> ray;
+
 	bool ray_on;
 	bool colision = false;
 	bool colisionx20 = false;
 	bool rectanglex20 = false;
 	bool colisions345 = false;
+
 	int cont = 0;
+	int cont1 = 0;
+	int cont2 = 0;
+	int cont3 = 0;
+	int cont4 = 0;
+
 	uint currentime, lastime, currentime2, lastime2;
 };

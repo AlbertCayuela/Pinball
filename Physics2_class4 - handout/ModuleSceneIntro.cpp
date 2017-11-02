@@ -15,6 +15,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	sensed = false;
 
 	Bola.PushBack({ 92,107,30,30 });
+	Bolas.PushBack({ 1,14,61,35 });
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -58,11 +59,10 @@ bool ModuleSceneIntro::Start()
 	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 6, 6);
 	sensorfletxaadaltdreta = App->physics->CreateRectangleSensor(101, 26, 6, 6);
 	sensorfletxadretaabaix = App->physics->CreateRectangleSensor(18, 242, 6, 6);
-
-
-
-
-
+	BolaEsquina = App->physics->CreateRectangleSensor(85, 67, 50, 33);
+	BolaSuperior = App->physics->CreateRectangleSensor(287, 137, 50, 33);
+	BolaDreta = App->physics->CreateRectangleSensor(363, 137, 50, 33);
+	BolaInferior = App->physics->CreateRectangleSensor(314,205,50,33);
 
 	int Paletadreta[16] = {
 		330, 709,
@@ -349,6 +349,49 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	App->renderer->Blit(background, 0, 0);
+
+	currentanimation1 = &Bolas;
+
+	if (bolaEsquina == true && cont1 <= 10)
+	{
+		App->renderer->Blit(spritesheet, 53, 67, &(currentanimation1->GetCurrentFrame()), 1.0f);
+		cont1++;
+		if (cont1 == 10) {
+			bolaEsquina = false;
+			cont1 = 0;
+		}
+	}
+
+	if (bolaSuperior == true && cont2 <= 10) 
+	{
+		App->renderer->Blit(spritesheet, 257, 145, &(currentanimation1->GetCurrentFrame()), 1.0f);
+		cont2++;
+		if (cont2 == 10) {
+			bolaSuperior = false;
+			cont2 = 0;
+		}
+	}
+
+	if (bolaDreta == true && cont3 <= 10) 
+	{
+		App->renderer->Blit(spritesheet, 332, 149, &(currentanimation1->GetCurrentFrame()), 1.0f);
+		cont3++;
+		if (cont3 == 10) {
+			bolaDreta = false;
+			cont3 = 0;
+		}
+	}
+
+	if (bolaInferior == true && cont4 <= 10) 
+	{
+		App->renderer->Blit(spritesheet, 283, 209, &(currentanimation1->GetCurrentFrame()), 1.0f);
+		cont4++;
+		if (cont4 == 10) {
+			bolaInferior = false;
+			cont4 = 0;
+		}
+	}
+	
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 30));
@@ -560,6 +603,24 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		colisions345 = true;
 	}
 
+	if (bodyB == BolaEsquina)
+	{
+		bolaEsquina = true;
+	}
 
+	if (bodyB == BolaSuperior) 
+	{
+		bolaSuperior = true;
+	}
+
+	if (bodyB == BolaDreta)
+	{
+		bolaDreta = true;
+	}
+
+	if(bodyB==BolaInferior)
+	{
+		bolaInferior = true;
+	}
 
 }
