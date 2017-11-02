@@ -396,11 +396,12 @@ update_status ModuleSceneIntro::Update()
 
 
 
-		if (App->player->vides <= 4 && colision == true && App->player->vides > 0 && colisionllum == true) {
+		if (App->player->vides <= 4 && colision == true && App->player->vides > 0 ) {
 
 			circles.add(App->physics->CreateCircle(446, 420, 30));
 			circles.getLast()->data->listener = this;
 			colision = false;
+			colisionllum = true;
 			//Pintar aqui quan xoqui cada punt
 
 			colisionllum = false;
@@ -429,10 +430,7 @@ update_status ModuleSceneIntro::Update()
 	}
 
 
-	if (colisionllum == true) {
-
-		//Pintar aqui quan xoqui cada punt
-	}
+	
 
 		/*if (App->player->vides == 3 && colision == true) {
 
@@ -572,5 +570,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if(bodyB == sensorpunt1 || bodyB == sensorpunt2 || bodyB == sensorpunt3 || bodyB == sensorpuntesquerra1 || bodyB == sensorpuntesquerra2 || bodyB == sensorpuntesquerra3 || bodyB == sensorpuntdreta1 || bodyB == sensorpuntdreta2 || bodyB == sensorpuntdreta3 || bodyB == sensorpuntdretaabaix1 || bodyB == sensorpuntdretaabaix2 || bodyB == sensorpuntdretaabaix3)
 
 		colisionllum = true;
+
+
+
 
 }
