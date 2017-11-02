@@ -39,7 +39,9 @@ bool ModuleSceneIntro::Start()
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 	sensor2 = App->physics->CreateRectangleSensor(21, 722, 10, 10);
-
+	sensor3 = App->physics->CreateRectangleSensor(205, 18, 10, 10);
+	sensor4 = App->physics->CreateRectangleSensor(388, 59, 10, 10);
+	sensor5 = App->physics->CreateRectangleSensor(423, 252, 10, 10);
 
 	int Paletadreta[16] = {
 		330, 709,
@@ -394,6 +396,14 @@ update_status ModuleSceneIntro::Update()
 		rectanglex20 = false;
 	}
 
+	if (currentime - lastime2 > 500 && colisions345) {
+		circles.getLast()->data->body->ApplyLinearImpulse({ 0, 6 }, { 0,0 }, true);
+		circles.getLast()->data->body->SetGravityScale(1);
+		colisions345 = false;
+	}
+
+
+
 		/*if (App->player->vides == 3 && colision == true) {
 
 			circles.add(App->physics->CreateCircle(446, 420, 30));
@@ -520,5 +530,15 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 
 	}
+
+	
+	if (bodyB == sensor3 || bodyB == sensor4 || bodyB == sensor5){
+		lastime2 = SDL_GetTicks();
+
+		circles.getLast()->data->body->SetGravityScale(0);
+		colisions345 = true;
+	}
+
+
 
 }

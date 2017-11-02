@@ -1,12 +1,9 @@
 ﻿  ModuleSceneIntro.cpp
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(481): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(483): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(485): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(488): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(496): warning C4101: 'y': variable local sin referencia
-c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(496): warning C4101: 'x': variable local sin referencia
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(491): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(493): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(495): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(498): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(506): warning C4101: 'y': variable local sin referencia
+c:\users\leix_\desktop\pinball\physics2_class4 - handout\modulesceneintro.cpp(506): warning C4101: 'x': variable local sin referencia
 c:\program files (x86)\microsoft visual studio\2017\enterprise\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  Generando código...
-  Omitiendo... (no se detectaron cambios relevantes)
-  Application.cpp
   SDL Game.vcxproj -> C:\Users\leix_\Desktop\Pinball\Physics2_class4 - handout\Debug\2D Physics - class 4.exe

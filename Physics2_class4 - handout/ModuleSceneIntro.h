@@ -25,6 +25,9 @@ public:
 	
 	PhysBody* sensor;
 	PhysBody* sensor2;
+	PhysBody* sensor3;
+	PhysBody* sensor4;
+	PhysBody* sensor5;
 	bool sensed;
 
 	Animation Bola;
@@ -41,6 +44,7 @@ public:
 	bool colision = false;
 	bool colisionx20 = false;
 	bool rectanglex20 = false;
+	bool colisions345 = false;
 	int cont = 0;
-	uint currentime, lastime, lastime2;
+	uint currentime, lastime, currentime2, lastime2;
 };
