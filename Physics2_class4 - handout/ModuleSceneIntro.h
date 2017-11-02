@@ -43,30 +43,63 @@ public:
 	PhysBody* sensorpuntdretaabaix3;
 	PhysBody* sensorpuntadalt;
 	PhysBody* sensorfletxaadaltesquerra;
+	PhysBody* sensorfletxaadaltesquerra1;
 	PhysBody* sensorfletxaadaltdreta;
+	PhysBody* sensorfletxaadaltdreta1;
 	PhysBody* sensorfletxadretaabaix;
 	PhysBody* BolaEsquina;
 	PhysBody* BolaSuperior;
 	PhysBody* BolaDreta;
 	PhysBody* BolaInferior;
 
-	bool sensed;
+	bool sensed= false;
 	bool bolaEsquina = false;
 	bool bolaSuperior = false;
 	bool bolaDreta = false;
 	bool bolaInferior = false;
+	bool punt1 = false;
+	bool punt2 = false;
+	bool punt3 = false;
+	bool puntesquerra1 = false;
+	bool puntesquerra2 = false;
+	bool puntesquerra3 = false;
+	bool puntdreta1 = false;
+	bool puntdreta2 = false;
+	bool puntdreta3 = false;
+	bool puntdretaabaix1 = false;
+	bool puntdretaabaix2 = false;
+	bool puntdretaabaix3 = false;
+	bool puntadalt = false;
+	bool fletxaesquerra = true;
+	bool fletxaesquerra1 = false;
+	bool x20 = false;
 
 	Animation Bola;
 	Animation Bolas;
+	Animation Punts;
+	Animation PuntsEsquerra;
+	Animation PuntsDreta;
+	Animation PuntsDretaAbaix;
+	Animation PuntAdalt;
+	Animation FletxaEsquerra;
+	Animation X20;
 
 	Animation* currentanimation = nullptr;
 	Animation* currentanimation1 = nullptr;
+	Animation* currentanimation2 = nullptr;
+	Animation* currentanimation3 = nullptr;
+	Animation* currentanimation4 = nullptr;
+	Animation* currentanimation5 = nullptr;
+	Animation* currentanimation6 = nullptr;
+	Animation* currentanimation7 = nullptr;
+	Animation* currentanimation8 = nullptr;
 
 	SDL_Texture* spritesheet;
 	SDL_Texture* background;
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+
 	uint bonus_fx;
 	p2Point<int> ray;
 
@@ -81,6 +114,8 @@ public:
 	int cont2 = 0;
 	int cont3 = 0;
 	int cont4 = 0;
+	int cont5 = 0;
+	
 
 	uint currentime, lastime, currentime2, lastime2;
 };

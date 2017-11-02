@@ -16,6 +16,13 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 
 	Bola.PushBack({ 92,107,30,30 });
 	Bolas.PushBack({ 1,14,61,35 });
+	Punts.PushBack({ 71,15,10,10 });
+	PuntsEsquerra.PushBack({160,146,19,20});
+	PuntsDreta.PushBack({109,141,19,17});
+	PuntsDretaAbaix.PushBack({193,166,16,19});
+	PuntAdalt.PushBack({85,182,18,12});
+	FletxaEsquerra.PushBack({18,133,68,74});
+	X20.PushBack({210,171,43,63});
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -51,12 +58,13 @@ bool ModuleSceneIntro::Start()
 	sensorpuntesquerra3 = App->physics->CreateRectangleSensor(75, 350, 4, 4);
 	sensorpuntdreta1 = App->physics->CreateRectangleSensor(275, 232, 4, 4);
 	sensorpuntdreta2 = App->physics->CreateRectangleSensor(290, 250, 4, 4);
-	sensorpuntdreta3 = App->physics->CreateRectangleSensor(305, 263, 4, 4);
+	sensorpuntdreta3 = App->physics->CreateRectangleSensor(300, 267, 4, 4);
 	sensorpuntdretaabaix1 = App->physics->CreateRectangleSensor(402, 405, 4, 4);
 	sensorpuntdretaabaix2 = App->physics->CreateRectangleSensor(412, 423, 4, 4);
 	sensorpuntdretaabaix3 = App->physics->CreateRectangleSensor(422, 442, 4, 4);
 	sensorpuntadalt = App->physics->CreateRectangleSensor(177, 67, 4, 4);
-	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 6, 6);
+	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 45, 15);
+	sensorfletxaadaltesquerra1 = App->physics->CreateRectangleSensor(47,49, 20, 40);
 	sensorfletxaadaltdreta = App->physics->CreateRectangleSensor(101, 26, 6, 6);
 	sensorfletxadretaabaix = App->physics->CreateRectangleSensor(18, 242, 6, 6);
 	BolaEsquina = App->physics->CreateRectangleSensor(85, 67, 50, 33);
@@ -351,6 +359,13 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background, 0, 0);
 
 	currentanimation1 = &Bolas;
+	currentanimation2 = &Punts; 
+	currentanimation3 = &PuntsEsquerra;
+	currentanimation4 = &PuntsDreta;
+	currentanimation5 = &PuntsDretaAbaix;
+	currentanimation6 = &PuntAdalt;
+	currentanimation7 = &FletxaEsquerra;
+	currentanimation8 = &X20;
 
 	if (bolaEsquina == true && cont1 <= 10)
 	{
@@ -392,6 +407,138 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
+	if (punt1 == true && colision == false) 
+	{
+		App->renderer->Blit(spritesheet, 344, 65, &(currentanimation2->GetCurrentFrame()), 1.0f);
+		
+	}
+	else
+	{
+		punt1 = false;
+	}
+
+	if (punt2 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 304, 65, &(currentanimation2->GetCurrentFrame()), 1.0f);
+	}
+	else 
+	{
+		punt2 = false;
+	}
+
+	if (punt3 == true && colision == false) 
+	{
+		App->renderer->Blit(spritesheet, 265, 64, &(currentanimation2->GetCurrentFrame()), 1.0f);
+	}
+	else 
+	{
+		punt3 = false;
+	}
+
+	if (puntesquerra1 == true && colision==false) 
+	{
+		App->renderer->Blit(spritesheet, 85,305, &(currentanimation3->GetCurrentFrame()), 1.0f);	
+	}
+	else 
+	{
+		puntesquerra1 = false;
+	}
+
+	if (puntesquerra2 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 74, 323, &(currentanimation3->GetCurrentFrame()), 1.0f);
+	}
+	else 
+	{
+		puntesquerra2 = false;
+	}
+	if (puntesquerra3 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 65,338, &(currentanimation3->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntesquerra3 = false;
+	}
+	if (puntdreta1 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 266,224, &(currentanimation4->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdreta1= false;
+	}
+	if (puntdreta2 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 282,238, &(currentanimation4->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdreta2 = false;
+	}
+	if (puntdreta3 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 295,256, &(currentanimation4->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdreta3 = false;
+	}
+	if (puntdretaabaix1 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 392,395, &(currentanimation5->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdretaabaix1 = false;
+	}
+	if (puntdretaabaix2 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 403,414, &(currentanimation5->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdretaabaix2 = false;
+	}
+	if (puntdretaabaix3 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 412,433, &(currentanimation5->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntdretaabaix3 = false;
+	}
+	if (puntadalt == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 169,63, &(currentanimation6->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		puntadalt = false;
+	}
+	if (x20 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 0,615, &(currentanimation8->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		x20 = false;
+	}
+	/*if (fletxaesquerra1 == true && cont5 <= 300) {
+		fletxaesquerra = true && cont5 <= 300;
+		cont5++;
+			App->renderer->Blit(spritesheet, 6,16, &(currentanimation7->GetCurrentFrame()), 1.0f);
+			if (cont5 == 300) {
+				fletxaesquerra=false;
+				fletxaesquerra = false;
+				cont5 = 0;
+			}
+		
+	}
+*/
+	
+
+
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 30));
@@ -434,10 +581,6 @@ update_status ModuleSceneIntro::Update()
 
 
 	if (colision == true) {
-
-
-
-
 
 		if (App->player->vides <= 4 && colision == true && App->player->vides > 0) {
 
@@ -622,5 +765,72 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		bolaInferior = true;
 	}
+	if (bodyB == sensorpunt1) 
+	{
+		punt1 = true;
+	}
 
+	if (bodyB == sensorpunt2) 
+	{
+		punt2 = true;
+	}
+
+	if (bodyB == sensorpunt3)
+	{
+
+		punt3 = true;
+	}
+	if (bodyB == sensorpuntesquerra1) 
+	{
+		puntesquerra1 = true;
+	}
+	if (bodyB == sensorpuntesquerra2) 
+	{
+		puntesquerra2 = true;
+	}
+	if (bodyB == sensorpuntesquerra3) 
+	{
+		puntesquerra3 = true;
+	}
+	if (bodyB == sensorpuntdreta1)
+	{
+		puntdreta1= true;
+	}
+	if (bodyB == sensorpuntdreta2)
+	{
+		puntdreta2 = true;
+	}
+	if (bodyB == sensorpuntdreta3)
+	{
+		puntdreta3 = true;
+	}
+	if (bodyB == sensorpuntdretaabaix1)
+	{
+		puntdretaabaix1 = true;
+	}
+	if (bodyB == sensorpuntdretaabaix2)
+	{
+		puntdretaabaix2 = true;
+	}
+	if (bodyB == sensorpuntdretaabaix3)
+	{
+		puntdretaabaix3 = true;
+	}
+	if (bodyB == sensorpuntadalt)
+	{
+		puntadalt = true;
+	}
+	if (bodyB == sensorfletxaadaltesquerra)
+	{
+		fletxaesquerra = true;
+	}
+	if (bodyB == sensorfletxaadaltesquerra1)
+	{
+		fletxaesquerra1 = true;
+	}
+	if (bodyB == sensor2)
+	{
+		x20 = true;
+	}
 }
+
