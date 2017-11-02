@@ -77,12 +77,13 @@ public:
 	bool puntdretaabaix3 = false;
 	bool puntadalt = false;
 	bool fletxaesquerra = true;
-	bool fletxaesquerra1 = false;
 	bool x20 = false;
 	bool x5adalt=false;
 	bool x5dreta = false;
 	bool fliperdreta = false;
 	bool fliperesquerra = false;
+	bool foC = true;
+	bool x10;
 
 	Animation Bola;
 	Animation Bolas;
@@ -91,12 +92,19 @@ public:
 	Animation PuntsDreta;
 	Animation PuntsDretaAbaix;
 	Animation PuntAdalt;
+	Animation FletxaDreta;
 	Animation FletxaEsquerra;
+	Animation Fletxaabaix;
 	Animation X20;
 	Animation X5adalt;
 	Animation Fliperdreta;
 	Animation Fliperesquerra;
-	
+	Animation Num0;
+	Animation Num1;
+	Animation Num2;
+	Animation Num3;
+	Animation foc;
+	Animation X10;
 
 	Animation* currentanimation = nullptr;
 	Animation* currentanimation1 = nullptr;
@@ -110,17 +118,31 @@ public:
 	Animation* currentanimation9 = nullptr;
 	Animation* currentanimation10 = nullptr;
 	Animation* currentanimation11 = nullptr;
+	Animation* currentanimation12 = nullptr;
+	Animation* currentanimation13 = nullptr;
+	Animation* currentanimation14 = nullptr;
+	Animation* currentanimation15 = nullptr;
+	Animation* currentanimation16 = nullptr;
+	Animation* currentanimation17 = nullptr;
+	Animation* currentanimation18 = nullptr;
+	Animation* currentanimation19 = nullptr;
 	
 
 	SDL_Texture* spritesheet;
 	SDL_Texture* background;
 	SDL_Texture* circle;
 	SDL_Texture* box;
-	SDL_Texture* rick;
 	SDL_Texture* fliperDreta;
 	SDL_Texture* fliperEsquerra;
+	SDL_Texture* Foc;
 
 	uint bonus_fx;
+	uint paletes;
+	uint paletesabaix;
+	uint randompoint;
+	uint motlla;
+	uint boles;
+
 	p2Point<int> ray;
 
 	bool ray_on;

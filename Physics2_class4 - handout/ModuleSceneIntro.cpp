@@ -10,10 +10,11 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	circle = box = NULL;
 	ray_on = false;
 	sensed = false;
 
+	//animations
 	Bola.PushBack({ 92,107,30,30 });
 	Bolas.PushBack({ 1,14,61,35 });
 	Punts.PushBack({ 71,15,10,10 });
@@ -22,10 +23,18 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	PuntsDretaAbaix.PushBack({193,166,16,19});
 	PuntAdalt.PushBack({85,182,18,12});
 	FletxaEsquerra.PushBack({18,133,68,74});
+	FletxaDreta.PushBack({100,54,68,75});
 	X20.PushBack({210,171,43,63});
 	X5adalt.PushBack({129,185,22,19});
 	Fliperdreta.PushBack({0,0,162,54});
 	Fliperesquerra.PushBack({0,0,160,50});
+	Fletxaabaix.PushBack({217,12,31,145});
+	Num0.PushBack({130,215,29,25});
+	Num1.PushBack({31,215,24,26});
+	Num2.PushBack({ 64,214,25,27 });
+	Num3.PushBack({97,213,26,27});
+	foc.PushBack({0,0,41,298});
+	X10.PushBack({176,211,33,31});
 	
 }
 
@@ -41,14 +50,19 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	//load sound and png
 	spritesheet = App->textures->Load("pinball/spritesheet.png");
 	background = App->textures->Load("pinball/captura.png");
 	circle = App->textures->Load("pinball/ball.png");
 	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	motlla = App->audio->LoadFx("pinball/audiomuelle.wav");
+	boles = App->audio->LoadFx("pinball/bolesreboten.wav");
+	randompoint = App->audio->LoadFx("pinball/paletes.wav");
+	paletes = App->audio->LoadFx("pinball//puntscualsevol.wav");
+	paletesabaix = App->audio->LoadFx("pinball/paletesabaix.wav");
 	fliperDreta = App->textures->Load("pinball/fliperdreta.png");
 	fliperEsquerra = App->textures->Load("pinball/fliperesquerre.png");
+	Foc = App->textures->Load("pinball/foc.png");
 	
 
 
@@ -72,14 +86,14 @@ bool ModuleSceneIntro::Start()
 	sensorpuntdretaabaix3 = App->physics->CreateRectangleSensor(422, 442, 4, 4);
 	sensorpuntadalt = App->physics->CreateRectangleSensor(177, 67, 4, 4);
 	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 6, 6);
-	
 	sensorfletxaadaltdreta = App->physics->CreateRectangleSensor(101, 26, 6, 6);
 	sensorfletxadretaabaix = App->physics->CreateRectangleSensor(18, 242, 6, 6);
-	BolaEsquina = App->physics->CreateRectangleSensor(85, 67, 50, 33);
+	BolaEsquina = App->physics->CreateRectangleSensor(85, 67, 50, 36);
 	BolaSuperior = App->physics->CreateRectangleSensor(287, 137, 50, 33);
 	BolaDreta = App->physics->CreateRectangleSensor(363, 137, 50, 33);
 	BolaInferior = App->physics->CreateRectangleSensor(314,205,50,33);
 
+	//create chain
 	int Paletadreta[16] = {
 		330, 709,
 		422, 638,
@@ -303,8 +317,7 @@ bool ModuleSceneIntro::Start()
 	};
 
 
-
-	//Con rebote extra
+	//set chain restitution
 	reboundhard1 = App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
 	reboundhard1->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard2 = App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
@@ -315,11 +328,10 @@ bool ModuleSceneIntro::Start()
 	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, BolaAbaix, 24, b2_staticBody);
 	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
-
 	reboundnormal = App->physics->CreateChain(0, 0, BolaSuperiorEsquerre, 22, b2_staticBody);
 	reboundnormal->body->GetFixtureList()->SetRestitution(1.5f);
 
-	//rebote normal
+
 	App->physics->CreateChain(0, 0, Captura, 160, b2_staticBody);
 
 	rebound = App->physics->CreateChain(0, 0, Paletadreta, 16, b2_staticBody);
@@ -339,7 +351,7 @@ bool ModuleSceneIntro::Start()
 	App->physics->CreateChain(0, 0, PalDreta, 8, b2_staticBody);
 
 	App->physics->CreateChain(0, 0, PalEsquerra, 8, b2_staticBody);
-
+	//print joints
 	App->physics->createFlipperR();
 	App->physics->createFlipperL();
 	App->physics->createFlipperLT();
@@ -362,8 +374,10 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	//print background
 	App->renderer->Blit(background, 0, 0);
-
+	
+	//set current animation
 	currentanimation1 = &Bolas;
 	currentanimation2 = &Punts; 
 	currentanimation3 = &PuntsEsquerra;
@@ -375,10 +389,39 @@ update_status ModuleSceneIntro::Update()
 	currentanimation9 = &X5adalt;
 	currentanimation10 = &Fliperdreta;
 	currentanimation11 = &Fliperesquerra;
+	currentanimation12 = &FletxaDreta;
+	currentanimation13 = &Fletxaabaix;
+	currentanimation14 = &Num0;
+	currentanimation15 = &Num1;
+	currentanimation16 = &Num2;
+	currentanimation17 = &Num3;
+	currentanimation18 = &foc;
+	currentanimation19 = &X10;
 
+	//blits
+	App->renderer->Blit(spritesheet, 8,236, &(currentanimation13->GetCurrentFrame()), 1.0f);
+	App->renderer->Blit(spritesheet, 98,19, &(currentanimation12->GetCurrentFrame()), 1.0f);
 	App->renderer->Blit(fliperEsquerra, -27, 205, &(currentanimation11->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper3->GetAngle());
 	App->renderer->Blit(fliperEsquerra, 70, 680, &(currentanimation11->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper2->GetAngle());
 	App->renderer->Blit(fliperDreta, 255, 680, &(currentanimation10->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper1->GetAngle());
+	App->renderer->Blit(spritesheet, 6, 16, &(currentanimation7->GetCurrentFrame()), 1.0f);
+	
+	if (App->player->vides == 1) 
+	{
+		App->renderer->Blit(spritesheet,448,707, &(currentanimation14->GetCurrentFrame()), 1.0f);
+	}
+	if (App->player->vides == 2)
+	{
+		App->renderer->Blit(spritesheet, 448, 707, &(currentanimation15->GetCurrentFrame()), 1.0f);
+	}
+	if (App->player->vides == 3)
+	{
+		App->renderer->Blit(spritesheet, 448, 707, &(currentanimation16->GetCurrentFrame()), 1.0f);
+	}
+	if (App->player->vides == 4)
+	{
+		App->renderer->Blit(spritesheet, 448, 707, &(currentanimation17->GetCurrentFrame()), 1.0f);
+	}
 
 	if (bolaEsquina == true && cont1 <= 10)
 	{
@@ -553,38 +596,45 @@ update_status ModuleSceneIntro::Update()
 	{
 		x5dreta = false;
 	}
-	if (fletxaesquerra1 == true && colision == false) {
-		
-			App->renderer->Blit(spritesheet, 6,16, &(currentanimation7->GetCurrentFrame()), 1.0f);
-			
-			fletxaesquerra = false;
-			
-		
+
+	if (x10 == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 380,266, &(currentanimation19->GetCurrentFrame()), 1.0f);
 	}
+	else
+	{
+		x10= false;
+	}
+
+		
+			
+
+	//create ball with 1
 	
-
-
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 30));
 		circles.getLast()->data->listener = this;
 	}
 
-
+	//impulse ball and joints move
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
+		App->audio->PlayFx(paletes);
 		App->physics->cosflipper1->ApplyTorque(250.0, true);
+		
 	}
 	else {
 		if (App->physics->cosflipper1->IsAwake()) {
 			App->physics->cosflipper1->ApplyTorque(-250.0, false);
 		}
 	}
-
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
+		App->audio->PlayFx(paletes);
 		App->physics->cosflipper2->ApplyTorque(-250.0, true);
 		App->physics->cosflipper3->ApplyTorque(-250, true);
+		
 	}
 	else {
 		if (App->physics->cosflipper2->IsAwake()) {
@@ -596,6 +646,9 @@ update_status ModuleSceneIntro::Update()
 	}
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
+
+		App->audio->PlayFx(motlla);
+		App->renderer->Blit(Foc, 436,140, &(currentanimation18->GetCurrentFrame()), 1.0f);
 		App->physics->muelle->ApplyForce(b2Vec2(0, -250), App->physics->muelle->GetLocalCenter(), true);
 	}
 	else {
@@ -604,18 +657,19 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
-
+	//lifes conditions
 	if (colision == true) {
 
-		if (App->player->vides <= 4 && colision == true && App->player->vides > 0) {
+		if (App->player->vides <= 5 && colision == true && App->player->vides > 0) {
 
-			circles.add(App->physics->CreateCircle(446, 420, 30));
+			circles.add(App->physics->CreateCircle(450, 423, 30));
 			circles.getLast()->data->listener = this;
 			colision = false;
 			App->player->vides--;
 
 		}
 	}
+	//getticks to multiplicate points
 	currentime = SDL_GetTicks();
 	if (currentime - lastime > 1000 && colisionx20) {
 		circles.getLast()->data->body->ApplyLinearImpulse({ 0, -10 }, { 0,0 }, true);
@@ -633,7 +687,7 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->body->SetGravityScale(1);
 		colisions345 = false;
 	}
-
+	//reset lifes, score and set highscore
 	if (App->player->vides == 0) {
 		if (App->player->score > App->player->highscore) {
 			App->player->highscore = App->player->score;
@@ -648,39 +702,7 @@ update_status ModuleSceneIntro::Update()
 
 
 
-		/*if (App->player->vides == 3 && colision == true) {
-
-			circles.add(App->physics->CreateCircle(446, 420, 30));
-			circles.getLast()->data->listener = this;
-			colision = false;
-
-			App->player->vides--;
-
-		}
-
-		if (App->player->vides == 2 && colision == true) {
-
-			circles.add(App->physics->CreateCircle(446, 420, 30));
-			circles.getLast()->data->listener = this;
-			colision = false;
-			App->player->vides--;
-
-		}
-		if (App->player->vides == 1 && colision == true) {
-
-			circles.add(App->physics->CreateCircle(446, 420, 30));
-			circles.getLast()->data->listener = this;
-			colision = false;
-			App->player->vides--;
-
-		}
-	}*/
-	//else if (creacioboles == false && vides < 3 && vides > 0) {
-	//	boles.add(App->physics->CreateCircle(442, 414, 40));
-
-	//	creacioboles = true;
-
-	//}
+		
 	//// Prepare for raycast ------------------------------------------------------
 
 	iPoint mouse;
@@ -721,13 +743,6 @@ update_status ModuleSceneIntro::Update()
 
 	c = ricks.getFirst();
 
-	while (c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
 
 	// ray -----------------
 	if (ray_on == true)
@@ -745,19 +760,11 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 }
 
+//collisions
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	App->audio->PlayFx(bonus_fx);
-
-
-	/*if(bodyA)
-	{
-	bodyA->GetPosition(x, y);
-	App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
-	*/
 	if (bodyB == sensor)
 	{
 
@@ -784,7 +791,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	if (bodyB == sensor5) {
 		lastime2 = SDL_GetTicks();
-		App->player->score += 10000;
+		
 		circles.getLast()->data->body->SetGravityScale(0);
 		colisions345 = true;
 	}
@@ -793,24 +800,29 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->player->score += 50;
 		bolaEsquina = true;
+
+		App->audio->PlayFx(boles);
 	}
 
 	if (bodyB == BolaSuperior) 
 	{
 		App->player->score += 50;
 		bolaSuperior = true;
+		App->audio->PlayFx(boles);
 	}
 
 	if (bodyB == BolaDreta)
 	{
 		App->player->score += 50;
 		bolaDreta = true;
+		App->audio->PlayFx(boles);
 	}
 
 	if(bodyB==BolaInferior)
 	{
 		App->player->score += 50;
 		bolaInferior = true;
+		App->audio->PlayFx(boles);
 	}
 	if (bodyB == sensorpunt1) 
 	{
@@ -831,88 +843,100 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 	if (bodyB == sensorpuntesquerra1) 
 	{
+		
 		App->player->score += 10;
 		puntesquerra1 = true;
+		App->audio->PlayFx(randompoint);
+		
 	}
 	if (bodyB == sensorpuntesquerra2) 
 	{
 		App->player->score += 10;
 		puntesquerra2 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntesquerra3) 
 	{
 		App->player->score += 10;
 		puntesquerra3 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntdreta1)
 	{
 		App->player->score += 10;
+		App->audio->PlayFx(randompoint);
 		puntdreta1= true;
 	}
 	if (bodyB == sensorpuntdreta2)
 	{
 		App->player->score += 10;
 		puntdreta2 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntdreta3)
 	{
 		App->player->score += 10;
-		
+		App->audio->PlayFx(randompoint);
 		puntdreta3 = true;
 	}
 	if (bodyB == sensorpuntdretaabaix1)
 	{
 		App->player->score += 10;
 		puntdretaabaix1 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntdretaabaix2)
 	{
 		App->player->score += 10;
 		puntdretaabaix2 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntdretaabaix3)
 	{
 		App->player->score += 10;
 		puntdretaabaix3 = true;
+		App->audio->PlayFx(randompoint);
 	}
 	if (bodyB == sensorpuntadalt)
 	{
+		
 		App->player->score += 10;
 		puntadalt = true;
+		App->audio->PlayFx(randompoint);
 	}
-	if (bodyB == sensorfletxaadaltesquerra)
-	{
-		
-		fletxaesquerra = true;
-	}
-	if (bodyB == sensorfletxaadaltesquerra1)
-	{
-	
-		fletxaesquerra1 = true;
-	}
+
 	if (bodyB == sensor2)
 	{
+		App->audio->PlayFx(randompoint);
 		App->player->score += 20000;
 		x20 = true;
 
 	}
 	if (bodyB == sensor3)
 	{
+		App->audio->PlayFx(randompoint);
 		App->player->score += 5000;
 		x5adalt = true;
 	}
 	if (bodyB == sensor4)
 	{
+		App->audio->PlayFx(randompoint);
 		App->player->score += 5000;
 		x5dreta = true;
 	}
 	if (bodyB == reboundhard1) {
-
+		App->audio->PlayFx(paletesabaix);
 		App->player->score += 200;
 	}
 	if (bodyB == reboundhard2) {
-
+		App->audio->PlayFx(paletesabaix);
 		App->player->score += 200;
+	}
+	if (bodyB == sensor5)
+	{
+		App->audio->PlayFx(randompoint);
+		App->player->score += 10000;
+		x10= true;
 	}
 }
 

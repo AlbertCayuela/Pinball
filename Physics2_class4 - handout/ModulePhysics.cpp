@@ -35,28 +35,11 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
-	//int x = 0;
-	//int y = 0;
-	//int diameter = 0;
-
-	//b2BodyDef body;
-	//body.type = b2_staticBody;
-	//body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	//b2Body* big_ball = world->CreateBody(&body);
-
-	//b2CircleShape shape;
-	//shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	//b2FixtureDef fixture;
-	//fixture.shape = &shape;
-	//big_ball->CreateFixture(&fixture);
 
 	return true;
 }
 
-// 
+
 update_status ModulePhysics::PreUpdate()
 {
 	world->Step(1.0f / 60.0f, 6, 2);
@@ -74,7 +57,7 @@ update_status ModulePhysics::PreUpdate()
 
 	return UPDATE_CONTINUE;
 }
-
+//create pinball balls
 PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 {
 	b2BodyDef body;
@@ -127,32 +110,6 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, fl
 
 	return pbody;
 }
-//PhysBody* ModulePhysics::CreateBoles(int x, int y, int radius) {
-//
-//
-//	b2BodyDef body;
-//	body.type = b2_dynamicBody;
-//	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-//
-//	b2Body* b = world->CreateBody(&body);
-//
-//	b2CircleShape shape;
-//	shape.m_radius = PIXEL_TO_METERS(radius)*0.5f;
-//	b2FixtureDef fixture;
-//	fixture.shape = &shape;
-//	fixture.density = 0.9f;
-//	fixture.restitution = 0.5f;
-//
-//	b->CreateFixture(&fixture);
-//
-//	PhysBody* pbody = new PhysBody();
-//	pbody->body = b;
-//	b->SetUserData(pbody);
-//	pbody->width = pbody->height = radius;
-//
-//	return pbody;
-//
-//}
 
 
 PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
@@ -225,19 +182,19 @@ update_status ModulePhysics::PostUpdate()
 {
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
+		
 
-	if(!debug)
+	if(debug)
 		return UPDATE_CONTINUE;
 
-	// Bonus code: this will iterate all objects in the world and draw the circles
-	// You need to provide your own macro to translate meters to pixels
+	
 	for(b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
 		for(b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
 		{
 			switch(f->GetType())
 			{
-				// Draw circles ------------------------------------------------
+				// Draw circles ----------------------------------------------
 				case b2Shape::e_circle:
 				{
 					b2CircleShape* shape = (b2CircleShape*)f->GetShape();
@@ -268,7 +225,7 @@ update_status ModulePhysics::PostUpdate()
 				break;
 
 				// Draw chains contour -------------------------------------------
-				/*case b2Shape::e_chain:
+				case b2Shape::e_chain:
 				{
 					b2ChainShape* shape = (b2ChainShape*)f->GetShape();
 					b2Vec2 prev, v;
@@ -277,14 +234,14 @@ update_status ModulePhysics::PostUpdate()
 					{
 						v = b->GetWorldPoint(shape->m_vertices[i]);
 						if(i > 0)
-						//	App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 0, 0, 0);
+						App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 0, 0, 0);
 						prev = v;
 					}
 
 					v = b->GetWorldPoint(shape->m_vertices[0]);
-					//App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
+					App->renderer->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 100, 255, 100);
 				}
-				break;*/
+				break;
 
 				// Draw a single segment(edge) ----------------------------------
 				case b2Shape::e_edge:
@@ -299,22 +256,10 @@ update_status ModulePhysics::PostUpdate()
 				break;
 			}
 
-			// TODO 1: If mouse button 1 is pressed ...
-			// App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN
-			// test if the current body contains mouse position
+			
 		}
 	}
 
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
-
-
-	// TODO 3: If the player keeps pressing the mouse button, update
-	// target position and draw a red line between both anchor points
-
-	// TODO 4: If the player releases the mouse button, destroy the joint
 
 	return UPDATE_CONTINUE;
 }
@@ -394,7 +339,7 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
 }
-
+//flipper creation
 b2Body* ModulePhysics::createFlipperR() {
 	b2BodyDef FlipperDef;
 	FlipperDef.type = b2_dynamicBody;
@@ -437,7 +382,7 @@ b2Body* ModulePhysics::createFlipperR() {
 
 	return cosflipper1;
 }
-
+//flipper creation
 b2Body* ModulePhysics::createFlipperL() {
 	b2BodyDef Flipper2Def;
 	Flipper2Def.type = b2_dynamicBody;
@@ -480,6 +425,7 @@ b2Body* ModulePhysics::createFlipperL() {
 
 	return cosflipper2;
 }
+//flipper creation
 b2Body* ModulePhysics::createFlipperLT() {
 	b2BodyDef Fillper3Def;
 	Fillper3Def.type = b2_dynamicBody;
@@ -522,6 +468,8 @@ b2Body* ModulePhysics::createFlipperLT() {
 
 	return cosflipper3;
 }
+
+//spring creation
 b2Body* ModulePhysics::createSpring() {
 	b2BodyDef muelledef;
 	muelledef.type = b2_dynamicBody;

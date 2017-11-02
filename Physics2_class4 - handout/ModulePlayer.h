@@ -18,7 +18,7 @@ public:
 
 public:
 	
-	int vides = 4;
+	int vides = 5;
 	int score;
 	int highscore;
 

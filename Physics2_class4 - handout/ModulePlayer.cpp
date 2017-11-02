@@ -17,7 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	score = 0;
-	vides = 4;
+	vides = 5;
 	highscore = score;
 	LOG("Loading player");
 	return true;
@@ -34,9 +34,9 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
+	//print tittle
 	char title[80];
-	int n = sprintf_s(title, "Titulpinball  SCORE: %i  HIGHSCORE: %i", score, highscore);
+	int n = sprintf_s(title, "Droid Pinball - SCORE: %i  HIGHSCORE: %i  LIFES: %i", score, highscore, vides-1);
 	App->window->SetTitle(title);
 
 	
