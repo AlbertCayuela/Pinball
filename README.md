@@ -9,7 +9,7 @@ This game takes as a model the Droid pinball game that can be found at the follo
 Aleix Castillo Arrià,
 Albert Cayuela Naval
 
-# Inputs
+## Inputs
 
 ### Keybord Inputs
 
