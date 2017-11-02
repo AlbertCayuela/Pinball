@@ -73,6 +73,10 @@ public:
 	bool fletxaesquerra = true;
 	bool fletxaesquerra1 = false;
 	bool x20 = false;
+	bool x5adalt=false;
+	bool x5dreta = false;
+	bool fliperdreta = false;
+	bool fliperesquerra = false;
 
 	Animation Bola;
 	Animation Bolas;
@@ -83,6 +87,10 @@ public:
 	Animation PuntAdalt;
 	Animation FletxaEsquerra;
 	Animation X20;
+	Animation X5adalt;
+	Animation Fliperdreta;
+	Animation Fliperesquerra;
+	
 
 	Animation* currentanimation = nullptr;
 	Animation* currentanimation1 = nullptr;
@@ -93,12 +101,18 @@ public:
 	Animation* currentanimation6 = nullptr;
 	Animation* currentanimation7 = nullptr;
 	Animation* currentanimation8 = nullptr;
+	Animation* currentanimation9 = nullptr;
+	Animation* currentanimation10 = nullptr;
+	Animation* currentanimation11 = nullptr;
+	
 
 	SDL_Texture* spritesheet;
 	SDL_Texture* background;
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+	SDL_Texture* fliperDreta;
+	SDL_Texture* fliperEsquerra;
 
 	uint bonus_fx;
 	p2Point<int> ray;

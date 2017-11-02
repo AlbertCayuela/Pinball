@@ -23,6 +23,10 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	PuntAdalt.PushBack({85,182,18,12});
 	FletxaEsquerra.PushBack({18,133,68,74});
 	X20.PushBack({210,171,43,63});
+	X5adalt.PushBack({129,185,22,19});
+	Fliperdreta.PushBack({0,0,162,54});
+	Fliperesquerra.PushBack({0,0,160,50});
+	
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -39,10 +43,14 @@ bool ModuleSceneIntro::Start()
 
 	spritesheet = App->textures->Load("pinball/spritesheet.png");
 	background = App->textures->Load("pinball/captura.png");
-	circle = App->textures->Load("pinball/wheel.png");
+	circle = App->textures->Load("pinball/ball.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	fliperDreta = App->textures->Load("pinball/fliperdreta.png");
+	fliperEsquerra = App->textures->Load("pinball/fliperesquerre.png");
+	
+
 
 	//sensors
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
@@ -366,6 +374,13 @@ update_status ModuleSceneIntro::Update()
 	currentanimation6 = &PuntAdalt;
 	currentanimation7 = &FletxaEsquerra;
 	currentanimation8 = &X20;
+	currentanimation9 = &X5adalt;
+	currentanimation10 = &Fliperdreta;
+	currentanimation11 = &Fliperesquerra;
+
+	App->renderer->Blit(fliperEsquerra, -27, 205, &(currentanimation11->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper3->GetAngle());
+	App->renderer->Blit(fliperEsquerra, 70, 680, &(currentanimation11->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper2->GetAngle());
+	App->renderer->Blit(fliperDreta, 255, 680, &(currentanimation10->GetCurrentFrame()), 1.0f, RADTODEG * App->physics->cosflipper1->GetAngle());
 
 	if (bolaEsquina == true && cont1 <= 10)
 	{
@@ -524,6 +539,22 @@ update_status ModuleSceneIntro::Update()
 	{
 		x20 = false;
 	}
+	if (x5adalt == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 193,46, &(currentanimation9->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		x5adalt = false;
+	}
+	if (x5dreta == true && colision == false)
+	{
+		App->renderer->Blit(spritesheet, 390,92, &(currentanimation9->GetCurrentFrame()), 1.0f);
+	}
+	else
+	{
+		x5dreta = false;
+	}
 	/*if (fletxaesquerra1 == true && cont5 <= 300) {
 		fletxaesquerra = true && cont5 <= 300;
 		cont5++;
@@ -661,8 +692,8 @@ update_status ModuleSceneIntro::Update()
 		currentanimation = &Bola;
 		int x, y;
 		c->data->GetPosition(x, y);
-		if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-			App->renderer->Blit(spritesheet, x, y, &(currentanimation->GetCurrentFrame()), 1.0f, c->data->GetRotation());
+		//if (c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
+			App->renderer->Blit(circle, x+15, y+15, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
 
@@ -831,6 +862,14 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyB == sensor2)
 	{
 		x20 = true;
+	}
+	if (bodyB == sensor3)
+	{
+		x5adalt = true;
+	}
+	if (bodyB == sensor4)
+	{
+		x5dreta = true;
 	}
 }
 
