@@ -23,7 +23,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	PuntsDretaAbaix.PushBack({193,166,16,19});
 	PuntAdalt.PushBack({85,182,18,12});
 	FletxaEsquerra.PushBack({18,133,68,74});
-	FletxaDreta.PushBack({100,54,68,75});
+	FletxaDreta.PushBack({112,57,68,75});
 	X20.PushBack({210,171,43,63});
 	X5adalt.PushBack({129,185,22,19});
 	Fliperdreta.PushBack({0,0,162,54});
