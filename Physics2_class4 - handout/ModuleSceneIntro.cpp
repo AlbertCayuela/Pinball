@@ -36,12 +36,33 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-
+	//sensors
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 	sensor2 = App->physics->CreateRectangleSensor(21, 722, 10, 10);
 	sensor3 = App->physics->CreateRectangleSensor(205, 18, 10, 10);
 	sensor4 = App->physics->CreateRectangleSensor(388, 59, 10, 10);
 	sensor5 = App->physics->CreateRectangleSensor(423, 252, 10, 10);
+	sensorpunt1 = App->physics->CreateRectangleSensor(350, 71, 5, 6);
+	sensorpunt2 = App->physics->CreateRectangleSensor(311, 71, 5, 6);
+	sensorpunt3 = App->physics->CreateRectangleSensor(270, 71, 5, 6);
+	sensorpuntesquerra1 = App->physics->CreateRectangleSensor(93, 315, 4, 4);
+	sensorpuntesquerra2 = App->physics->CreateRectangleSensor(85, 333, 4, 4);
+	sensorpuntesquerra3 = App->physics->CreateRectangleSensor(75, 350, 4, 4);
+	sensorpuntdreta1 = App->physics->CreateRectangleSensor(275, 232, 4, 4);
+	sensorpuntdreta2 = App->physics->CreateRectangleSensor(290, 250, 4, 4);
+	sensorpuntdreta3 = App->physics->CreateRectangleSensor(305, 263, 4, 4);
+	sensorpuntdretaabaix1 = App->physics->CreateRectangleSensor(402, 405, 4, 4);
+	sensorpuntdretaabaix2 = App->physics->CreateRectangleSensor(412, 423, 4, 4);
+	sensorpuntdretaabaix3 = App->physics->CreateRectangleSensor(422, 442, 4, 4);
+	sensorpuntadalt = App->physics->CreateRectangleSensor(177, 67, 4, 4);
+	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 6, 6);
+	sensorfletxaadaltdreta = App->physics->CreateRectangleSensor(101, 26, 6, 6);
+	sensorfletxadretaabaix = App->physics->CreateRectangleSensor(18, 242, 6, 6);
+
+
+
+
+
 
 	int Paletadreta[16] = {
 		330, 709,

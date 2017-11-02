@@ -28,6 +28,23 @@ public:
 	PhysBody* sensor3;
 	PhysBody* sensor4;
 	PhysBody* sensor5;
+	PhysBody* sensorpunt1;
+	PhysBody* sensorpunt2;
+	PhysBody* sensorpunt3;
+	PhysBody* sensorpuntesquerra1;
+	PhysBody* sensorpuntesquerra2;
+	PhysBody* sensorpuntesquerra3;
+	PhysBody* sensorpuntdreta1;
+	PhysBody* sensorpuntdreta2;
+	PhysBody* sensorpuntdreta3;
+	PhysBody* sensorpuntdretaabaix1;
+	PhysBody* sensorpuntdretaabaix2;
+	PhysBody* sensorpuntdretaabaix3;
+	PhysBody* sensorpuntadalt;
+	PhysBody* sensorfletxaadaltesquerra;
+	PhysBody* sensorfletxaadaltdreta;
+	PhysBody* sensorfletxadretaabaix;
+
 	bool sensed;
 
 	Animation Bola;
