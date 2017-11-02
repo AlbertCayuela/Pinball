@@ -71,8 +71,8 @@ bool ModuleSceneIntro::Start()
 	sensorpuntdretaabaix2 = App->physics->CreateRectangleSensor(412, 423, 4, 4);
 	sensorpuntdretaabaix3 = App->physics->CreateRectangleSensor(422, 442, 4, 4);
 	sensorpuntadalt = App->physics->CreateRectangleSensor(177, 67, 4, 4);
-	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 45, 15);
-	sensorfletxaadaltesquerra1 = App->physics->CreateRectangleSensor(47,49, 20, 40);
+	sensorfletxaadaltesquerra = App->physics->CreateRectangleSensor(69, 26, 6, 6);
+	
 	sensorfletxaadaltdreta = App->physics->CreateRectangleSensor(101, 26, 6, 6);
 	sensorfletxadretaabaix = App->physics->CreateRectangleSensor(18, 242, 6, 6);
 	BolaEsquina = App->physics->CreateRectangleSensor(85, 67, 50, 33);
@@ -302,15 +302,13 @@ bool ModuleSceneIntro::Start()
 		438, 494
 	};
 
-	PhysBody* reboundhard;
-	PhysBody* reboundnormal;
-	PhysBody* rebound;
+
 
 	//Con rebote extra
-	reboundhard = App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
-	reboundhard = App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
-	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
+	reboundhard1 = App->physics->CreateChain(0, 0, SobrePaletaesquerra, 8, b2_staticBody);
+	reboundhard1->body->GetFixtureList()->SetRestitution(1.5f);
+	reboundhard2 = App->physics->CreateChain(0, 0, SobrePaletadreta, 8, b2_staticBody);
+	reboundhard2->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, BolaSuperiorEsquerra, 22, b2_staticBody);
 	reboundhard->body->GetFixtureList()->SetRestitution(1.5f);
 	reboundhard = App->physics->CreateChain(0, 0, CercleCantoSuperior, 24, b2_staticBody);
@@ -555,18 +553,14 @@ update_status ModuleSceneIntro::Update()
 	{
 		x5dreta = false;
 	}
-	/*if (fletxaesquerra1 == true && cont5 <= 300) {
-		fletxaesquerra = true && cont5 <= 300;
-		cont5++;
+	if (fletxaesquerra1 == true && colision == false) {
+		
 			App->renderer->Blit(spritesheet, 6,16, &(currentanimation7->GetCurrentFrame()), 1.0f);
-			if (cont5 == 300) {
-				fletxaesquerra=false;
-				fletxaesquerra = false;
-				cont5 = 0;
-			}
+			
+			fletxaesquerra = false;
+			
 		
 	}
-*/
 	
 
 
@@ -639,6 +633,18 @@ update_status ModuleSceneIntro::Update()
 		circles.getLast()->data->body->SetGravityScale(1);
 		colisions345 = false;
 	}
+
+	if (App->player->vides == 0) {
+		if (App->player->score > App->player->highscore) {
+			App->player->highscore = App->player->score;
+
+		}
+
+
+		App->player->score = 0;
+		App->player->vides = 4;
+	}
+
 
 
 
@@ -770,106 +776,144 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 	
-	if (bodyB == sensor3 || bodyB == sensor4 || bodyB == sensor5){
-		lastime2 = SDL_GetTicks();
 
+	if (bodyB == sensor3 || bodyB == sensor4) {
+		lastime2 = SDL_GetTicks();
+		circles.getLast()->data->body->SetGravityScale(0);
+		colisions345 = true;
+	}
+	if (bodyB == sensor5) {
+		lastime2 = SDL_GetTicks();
+		App->player->score += 10000;
 		circles.getLast()->data->body->SetGravityScale(0);
 		colisions345 = true;
 	}
 
 	if (bodyB == BolaEsquina)
 	{
+		App->player->score += 50;
 		bolaEsquina = true;
 	}
 
 	if (bodyB == BolaSuperior) 
 	{
+		App->player->score += 50;
 		bolaSuperior = true;
 	}
 
 	if (bodyB == BolaDreta)
 	{
+		App->player->score += 50;
 		bolaDreta = true;
 	}
 
 	if(bodyB==BolaInferior)
 	{
+		App->player->score += 50;
 		bolaInferior = true;
 	}
 	if (bodyB == sensorpunt1) 
 	{
+		App->player->score += 10;
 		punt1 = true;
 	}
 
 	if (bodyB == sensorpunt2) 
 	{
+		App->player->score += 10;
 		punt2 = true;
 	}
 
 	if (bodyB == sensorpunt3)
 	{
-
+		App->player->score += 10;
 		punt3 = true;
 	}
 	if (bodyB == sensorpuntesquerra1) 
 	{
+		App->player->score += 10;
 		puntesquerra1 = true;
 	}
 	if (bodyB == sensorpuntesquerra2) 
 	{
+		App->player->score += 10;
 		puntesquerra2 = true;
 	}
 	if (bodyB == sensorpuntesquerra3) 
 	{
+		App->player->score += 10;
 		puntesquerra3 = true;
 	}
 	if (bodyB == sensorpuntdreta1)
 	{
+		App->player->score += 10;
 		puntdreta1= true;
 	}
 	if (bodyB == sensorpuntdreta2)
 	{
+		App->player->score += 10;
 		puntdreta2 = true;
 	}
 	if (bodyB == sensorpuntdreta3)
 	{
+		App->player->score += 10;
+		
 		puntdreta3 = true;
 	}
 	if (bodyB == sensorpuntdretaabaix1)
 	{
+		App->player->score += 10;
 		puntdretaabaix1 = true;
 	}
 	if (bodyB == sensorpuntdretaabaix2)
 	{
+		App->player->score += 10;
 		puntdretaabaix2 = true;
 	}
 	if (bodyB == sensorpuntdretaabaix3)
 	{
+		App->player->score += 10;
 		puntdretaabaix3 = true;
 	}
 	if (bodyB == sensorpuntadalt)
 	{
+		App->player->score += 10;
 		puntadalt = true;
 	}
 	if (bodyB == sensorfletxaadaltesquerra)
 	{
+		
 		fletxaesquerra = true;
 	}
 	if (bodyB == sensorfletxaadaltesquerra1)
 	{
+	
 		fletxaesquerra1 = true;
 	}
 	if (bodyB == sensor2)
 	{
+		App->player->score += 20000;
 		x20 = true;
+
 	}
 	if (bodyB == sensor3)
 	{
+		App->player->score += 5000;
 		x5adalt = true;
 	}
 	if (bodyB == sensor4)
 	{
+		App->player->score += 5000;
 		x5dreta = true;
 	}
+	if (bodyB == reboundhard1) {
+
+		App->player->score += 200;
+	}
+	if (bodyB == reboundhard2) {
+
+		App->player->score += 200;
+	}
 }
+
 

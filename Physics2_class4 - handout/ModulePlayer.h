@@ -19,6 +19,8 @@ public:
 public:
 	
 	int vides = 4;
+	int score;
+	int highscore;
 
 	bool creacioboles = false;
 

@@ -51,6 +51,12 @@ public:
 	PhysBody* BolaSuperior;
 	PhysBody* BolaDreta;
 	PhysBody* BolaInferior;
+	PhysBody* reboundhard;
+	PhysBody* reboundhard1;
+	PhysBody* reboundhard2;
+	PhysBody* reboundnormal;
+	PhysBody* rebound;
+
 
 	bool sensed= false;
 	bool bolaEsquina = false;
